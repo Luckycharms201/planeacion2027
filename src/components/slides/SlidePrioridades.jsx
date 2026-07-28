@@ -89,11 +89,11 @@ export default function SlidePrioridades({ slide }) {
       </div>
 
       {/* los tres pilares */}
-      <div className="grid min-h-0 flex-1 grid-cols-3 items-stretch gap-8">
+      <div className="grid min-h-0 flex-1 grid-cols-3 content-center items-stretch gap-6">
         {pillars.map((p, i) => (
           <div
             key={i}
-            className="pri-card group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-blue-700 bg-blue-900/40 p-5 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-[color:var(--color-accent)] hover:shadow-[0_0_34px_-10px_var(--color-accent)]"
+            className="pri-card group relative flex flex-col gap-2.5 overflow-hidden rounded-2xl border border-blue-700 bg-blue-900/40 p-4 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-[color:var(--color-accent)] hover:shadow-[0_0_34px_-10px_var(--color-accent)]"
           >
             {/* filo de luz superior */}
             <span
@@ -107,7 +107,7 @@ export default function SlidePrioridades({ slide }) {
             {/* numeral gigante de fondo */}
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute -top-5 -right-1 text-[6rem] leading-none font-black text-blue-500/10 select-none"
+              className="pointer-events-none absolute -top-3 -right-1 text-[4.5rem] leading-none font-black text-blue-500/10 select-none"
             >
               {String(i + 1).padStart(2, "0")}
             </span>
@@ -120,7 +120,7 @@ export default function SlidePrioridades({ slide }) {
               {p.lead}
             </p>
 
-            <div className="flex min-h-0 flex-1 flex-col justify-start gap-2.5">
+            <div className="flex flex-col justify-start gap-2.5">
               {/* pilar con mapa aniversario → enfoque */}
               {p.map?.map((m, mi) => (
                 <div key={mi} className="pri-item border-l-2 border-blue-700 pl-3.5">
