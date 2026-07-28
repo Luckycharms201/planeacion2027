@@ -513,7 +513,6 @@ export const GROUPS = [
           "Incorporar dentro del journey del candidato a graduar un evento insignia.",
         ],
       },
-      // cierre de toda la presentación: se queda como última slide del recorrido
       {
         id: "cierre-equipo",
         type: "equipo",
@@ -521,6 +520,51 @@ export const GROUPS = [
         logo: "/brand/logo-exatec-blanco.webp",
         photo: "/media/equipo.webp",
         photoAlt: "Equipo EXATEC Monterrey",
+      },
+    ],
+  },
+  {
+    id: "calendario",
+    name: "Calendario",
+    short: "CAL",
+    hub: { angle: -30 },
+    slides: [
+      {
+        id: "cal-ago-dic",
+        type: "calendario",
+        title: "Calendario",
+        kicker: "Agosto – Diciembre 2026",
+        year: 2026,
+        months: [8, 9, 10, 11, 12],
+        // formato: { date: "2026-08-15", title: "…", note: "…" (opcional) }
+        // `end` marca eventos de varios días
+        events: [
+          { date: "2026-08-04", title: "Visita VIP" },
+          { date: "2026-08-08", title: "Visita EXATEC EGADE" },
+          { date: "2026-08-14", title: "Visita Agrónomos '94/'95" },
+          { date: "2026-08-21", title: "Visita LED" },
+          { date: "2026-08-25", title: "Presentación de Libro Dorali" },
+          { date: "2026-09-02", title: "Arch Talks" },
+          {
+            date: "2026-09-25",
+            end: "2026-09-26",
+            title: "Regreso a Casa 25, 30 y 35 Aniversario",
+          },
+          { date: "2026-10-01", title: "RAC Prepatec CU" },
+          { date: "2026-10-03", title: "Visita Xavier Toussaint" },
+          { date: "2026-10-17", title: "RAC Prepatec SC" },
+          { date: "2026-10-23", title: "RAC 5, 10 y 15 Aniversario" },
+          { date: "2026-10-23", end: "2026-10-24", title: "RAC 20 Aniversario" },
+          { date: "2026-10-30", end: "2026-10-31", title: "RAC Básquetbol" },
+          { date: "2026-10-30", end: "2026-10-31", title: "Visita Javier Prieto" },
+          { date: "2026-10-31", title: "Salón de la Fama" },
+          { date: "2026-11-20", end: "2026-11-21", title: "RAC 40 y más" },
+          { date: "2026-12-12", title: "Visita TEC 40 Aniversario" },
+          // cumpleaños: estrellita en el día y en la lista (star: true)
+          { date: "2026-09-15", title: "Cumpleaños Karla", star: true },
+          { date: "2026-10-31", title: "Cumpleaños Chris", star: true },
+          { date: "2026-12-12", title: "Cumpleaños Mariana", star: true },
+        ],
       },
     ],
   },

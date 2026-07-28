@@ -66,12 +66,16 @@ h3,
   color: var(--color-bg-deep);
 }
 
-button {
-  font-family: inherit;
-  color: inherit;
-  cursor: pointer;
-  background: none;
-  border: none;
+/* En @layer base para que las utilidades de Tailwind (bg-*, border-*) puedan
+   sobreescribir el reset; fuera de layer le ganarían a cualquier clase. */
+@layer base {
+  button {
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
 }
 
 /* Animaciones del Journey (apertura/cierre de popups). Son CSS: el estado
