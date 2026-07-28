@@ -141,7 +141,7 @@ function IndicadorCard({ row, prevLabel, currLabel, delay }) {
 
   return (
     <div
-      className="ind-card flex flex-col justify-between rounded-2xl"
+      className="ind-card ind-hoverable flex flex-col justify-between rounded-2xl"
       style={{
         padding: 20,
         background:
@@ -217,7 +217,7 @@ function TotalPanel({ label, note, prev, curr, meta, prevLabel, accent, delay })
 
   return (
     <div
-      className="ind-hero flex flex-col justify-between rounded-2xl"
+      className="ind-hero ind-hoverable flex flex-col justify-between rounded-2xl"
       style={{
         padding: "14px 22px 16px",
         width: 330,
@@ -329,9 +329,18 @@ export default function SlideIndicadores({ slide }) {
         { opacity: 0, y: 24, filter: "blur(10px)", duration: 0.7 },
         "-=0.2"
       )
+      // clearProps: al terminar la entrada, GSAP deja un transform inline que
+      // le ganaría al scale del hover (:hover está en hoja de estilo). Se
+      // limpia para devolverle el control al CSS.
       .from(
         ".ind-hero",
-        { opacity: 0, x: 30, duration: 0.7, stagger: 0.1 },
+        {
+          opacity: 0,
+          x: 30,
+          duration: 0.7,
+          stagger: 0.1,
+          clearProps: "transform",
+        },
         "-=0.4"
       )
       .from(
@@ -341,7 +350,14 @@ export default function SlideIndicadores({ slide }) {
       )
       .from(
         ".ind-card",
-        { opacity: 0, y: 26, duration: 0.55, stagger: 0.07, ease: "power3.out" },
+        {
+          opacity: 0,
+          y: 26,
+          duration: 0.55,
+          stagger: 0.07,
+          ease: "power3.out",
+          clearProps: "transform",
+        },
         "-=0.75"
       )
       .from(
@@ -357,7 +373,21 @@ export default function SlideIndicadores({ slide }) {
       <div className="flex items-center justify-between gap-8">
         <SlideHeading kicker={slide.kicker} title={slide.title} />
 
+        {/* el total completo va a la derecha: la lectura izquierda→derecha
+            termina en el panel con acento, que es el dato principal */}
         <div className="flex items-stretch gap-4">
+          {altTotal && (
+            <TotalPanel
+              label={alt.label}
+              note={`sin ${excluded.map((r) => r.name).join(" ni ")}`}
+              prev={altTotal.prev}
+              curr={altTotal.curr}
+              meta={altTotal.meta}
+              prevLabel={slide.prevLabel}
+              delay={0.3}
+            />
+          )}
+
           <TotalPanel
             label={`Total ${slide.currLabel}`}
             /* la nota va en ambos paneles para que las cifras queden a la
@@ -368,20 +398,8 @@ export default function SlideIndicadores({ slide }) {
             meta={total.meta}
             prevLabel={slide.prevLabel}
             accent
-            delay={0.3}
+            delay={0.42}
           />
-
-          {altTotal && (
-            <TotalPanel
-              label={alt.label}
-              note={`sin ${excluded.map((r) => r.name).join(" ni ")}`}
-              prev={altTotal.prev}
-              curr={altTotal.curr}
-              meta={altTotal.meta}
-              prevLabel={slide.prevLabel}
-              delay={0.42}
-            />
-          )}
         </div>
       </div>
 

@@ -115,9 +115,34 @@ button {
 }
 .gafete-back { transform: rotateY(180deg); }
 
+/* Recuadros de la slide de Indicadores. Al pasar el mouse crecen un poco y
+   ganan el halo cyan del panel de total, para enfatizar el que se señala
+   durante la presentación.
+   Los `!important` son necesarios: cada recuadro trae su `box-shadow` y su
+   `border` en estilos inline, y una declaración inline normal solo la vence
+   una regla !important de hoja de estilo. */
+.ind-hoverable {
+  position: relative;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.ind-hoverable:hover {
+  transform: scale(1.035);
+  box-shadow: 0 0 52px -12px rgba(70, 229, 255, 0.6) !important;
+  border-color: rgba(70, 229, 255, 0.45) !important;
+  z-index: 3;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
+  }
+
+  /* sin motion: se conserva el halo como señal de hover, pero no el zoom */
+  .ind-hoverable:hover {
+    transform: none;
   }
 }
