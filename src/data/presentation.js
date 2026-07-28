@@ -352,6 +352,15 @@ export const GROUPS = [
         ],
       },
       {
+        id: "agr-jerseys",
+        type: "jerseys",
+        title: "Jerseys Versión Jugador",
+        kicker: "Comunidad en movimiento",
+        raised: 44539,
+        stats: [{ value: 73, label: "Jerseys vendidas" }],
+        video: { n: 1, note: "Jerseys Versión Jugador", src: "/media/jersey.mp4" },
+      },
+      {
         id: "agr-monto",
         type: "monto",
         title: "Generosidad - Total Recaudado por Agrupaciones",

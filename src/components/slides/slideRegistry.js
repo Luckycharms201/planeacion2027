@@ -13,6 +13,7 @@ import SlideRetos from "./SlideRetos";
 import SlideAprendizajes from "./SlideAprendizajes";
 import SlideCalendario from "./SlideCalendario";
 import SlidePrioridades from "./SlidePrioridades";
+import SlideJerseys from "./SlideJerseys";
 import SlideAgrupacionesList from "./SlideAgrupacionesList";
 import SlideEmbed from "./SlideEmbed";
 import SlideGafetes from "./SlideGafetes";
@@ -41,6 +42,7 @@ export const SLIDE_COMPONENTS = {
   aprendizajes: SlideAprendizajes,
   calendario: SlideCalendario,
   prioridades: SlidePrioridades,
+  jerseys: SlideJerseys,
   agrupacionesList: SlideAgrupacionesList,
   embed: SlideEmbed,
   gafetes: SlideGafetes,
