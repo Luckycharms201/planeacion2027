@@ -220,7 +220,6 @@ function TotalPanel({ label, note, prev, curr, meta, prevLabel, accent, delay })
       className="ind-hero ind-hoverable flex flex-col justify-between rounded-2xl"
       style={{
         padding: "14px 22px 16px",
-        width: 330,
         background: accent
           ? "linear-gradient(140deg, rgba(70,229,255,0.10), rgba(12,26,58,0.6))"
           : "linear-gradient(158deg, rgba(21,52,138,0.38), rgba(12,26,58,0.55))",
@@ -329,9 +328,8 @@ export default function SlideIndicadores({ slide }) {
         { opacity: 0, y: 24, filter: "blur(10px)", duration: 0.7 },
         "-=0.2"
       )
-      // clearProps: al terminar la entrada, GSAP deja un transform inline que
-      // le ganaría al scale del hover (:hover está en hoja de estilo). Se
-      // limpia para devolverle el control al CSS.
+      // clearProps deja el DOM sin transform al terminar la entrada; el
+      // realce de hover lo maneja el CSS (ver .ind-hoverable en index.css).
       .from(
         ".ind-hero",
         {
@@ -375,7 +373,7 @@ export default function SlideIndicadores({ slide }) {
 
         {/* el total completo va a la derecha: la lectura izquierda→derecha
             termina en el panel con acento, que es el dato principal */}
-        <div className="flex items-stretch gap-4">
+        <div className="ind-totals flex items-stretch gap-4">
           {altTotal && (
             <TotalPanel
               label={alt.label}
@@ -404,7 +402,7 @@ export default function SlideIndicadores({ slide }) {
       </div>
 
       {/* rejilla de indicadores */}
-      <div className="grid min-h-0 flex-1 grid-cols-4 gap-4">
+      <div className="ind-grid min-h-0 flex-1 gap-4">
         {rows.map((row, i) => (
           <IndicadorCard
             key={row.name}

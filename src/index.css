@@ -124,15 +124,63 @@ button {
 .ind-hoverable {
   position: relative;
   transition:
-    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 0.3s ease,
     border-color 0.3s ease;
 }
 .ind-hoverable:hover {
-  transform: scale(1.035);
   box-shadow: 0 0 52px -12px rgba(70, 229, 255, 0.6) !important;
   border-color: rgba(70, 229, 255, 0.45) !important;
   z-index: 3;
+}
+
+/* El recuadro señalado crece cambiando el LAYOUT, no con `transform: scale`:
+   su columna y su fila se ensanchan y las demás ceden exactamente lo mismo
+   (la suma se mantiene en 4fr y 2fr). Así el resto se reacomoda en vivo y
+   nada se encima ni se sale de la slide.
+
+   Los factores están topados por el contenido real, medido en pantalla:
+   · columna angosta 0.833fr ≈ 273 px → deja 233 px útiles, y el título más
+     largo ("Vinculados Estratégicamente") mide 216 px, así que no se parte;
+   · fila baja 0.9fr cede 23 px, y la holgura vertical de una tarjeta es 27 px.
+   Si se agregan indicadores o títulos más largos, hay que volver a medir. */
+.ind-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  transition:
+    grid-template-columns 0.34s cubic-bezier(0.2, 0.8, 0.2, 1),
+    grid-template-rows 0.34s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.ind-grid:has(> :nth-child(4n + 1):hover) {
+  grid-template-columns: 1.5fr 0.8333fr 0.8333fr 0.8333fr;
+}
+.ind-grid:has(> :nth-child(4n + 2):hover) {
+  grid-template-columns: 0.8333fr 1.5fr 0.8333fr 0.8333fr;
+}
+.ind-grid:has(> :nth-child(4n + 3):hover) {
+  grid-template-columns: 0.8333fr 0.8333fr 1.5fr 0.8333fr;
+}
+.ind-grid:has(> :nth-child(4n + 4):hover) {
+  grid-template-columns: 0.8333fr 0.8333fr 0.8333fr 1.5fr;
+}
+.ind-grid:has(> :nth-child(-n + 4):hover) {
+  grid-template-rows: 1.1fr 0.9fr;
+}
+.ind-grid:has(> :nth-child(n + 5):hover) {
+  grid-template-rows: 0.9fr 1.1fr;
+}
+
+/* Los paneles de total crecen hacia el espacio libre que hay entre el título
+   y ellos (~390 px), así que no necesitan quitarle ancho al otro panel. */
+.ind-totals > .ind-hoverable {
+  flex: 0 0 330px;
+  transition:
+    flex-basis 0.34s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.ind-totals > .ind-hoverable:hover {
+  flex-basis: 412px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -141,8 +189,6 @@ button {
     transition-duration: 0.001ms !important;
   }
 
-  /* sin motion: se conserva el halo como señal de hover, pero no el zoom */
-  .ind-hoverable:hover {
-    transform: none;
-  }
+  /* sin motion: se conserva el halo como señal de hover, pero el reacomodo
+     de la rejilla es instantáneo (lo hace la regla global de arriba) */
 }
