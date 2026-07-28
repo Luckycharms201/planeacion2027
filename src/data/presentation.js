@@ -580,6 +580,44 @@ export const GROUPS = [
     ],
   },
   {
+    id: "proyectos",
+    name: "Proyectos",
+    short: "PRY",
+    hub: { angle: -60 },
+    slides: [
+      {
+        id: "pry-portada",
+        type: "cover",
+        title: "Proyectos",
+        kicker: "Planeación 2027 · Monterrey",
+        logo: "/brand/logo-exatec-blanco.webp",
+        logoAlt: "EXATEC",
+      },
+      {
+        id: "pry-formacion",
+        type: "formacion",
+        title: "Programas de Formación EXATEC",
+        kicker: "Proyectos",
+        objetivos: [
+          "Evolucionar el modelo de conferencias virtuales hacia una estrategia de formación segmentada por etapa de vida.",
+          "Ofrecer contenidos más relevantes y de mayor valor para cada audiencia, atendiendo sus intereses y necesidades específicas mediante ciclos temáticos impartidos por especialistas.",
+        ],
+        // diagrama de flujo del modelo de formación
+        flow: {
+          origen: "Comunidad EXATEC",
+          criterio: "Segmentación por etapa de vida",
+          etapas: [
+            { name: "Inicio Profesional", edad: "19–28 años" },
+            { name: "Consolidación Profesional", edad: "29–44 años" },
+            { name: "Legado e Impacto", edad: "45–60 años" },
+          ],
+          paso1: "Tema prioritario",
+          paso2: "2 conferencias con un especialista",
+        },
+      },
+    ],
+  },
+  {
     id: "calendario",
     name: "Calendario",
     short: "CAL",
