@@ -561,7 +561,7 @@ export const GROUPS = [
           { date: "2026-11-20", end: "2026-11-21", title: "RAC 40 y más" },
           { date: "2026-12-12", title: "Visita TEC 40 Aniversario" },
           // cumpleaños: estrellita en el día y en la lista (star: true)
-          { date: "2026-09-15", title: "Cumpleaños Karla", star: true },
+          { date: "2026-09-16", title: "Cumpleaños Karla", star: true },
           { date: "2026-10-31", title: "Cumpleaños Chris", star: true },
           { date: "2026-12-12", title: "Cumpleaños Mariana", star: true },
         ],
