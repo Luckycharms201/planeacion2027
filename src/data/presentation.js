@@ -95,12 +95,6 @@ export const GROUPS = [
         kicker: "Rediseño de Experiencia · Monterrey",
       },
       {
-        id: "rac-video-viejitos",
-        type: "video",
-        title: "Video · Regreso a Casa",
-        placeholders: [{ n: 1, kind: "video", note: "Video RAC (egresados)", src: "/media/ractec.mp4" }],
-      },
-      {
         id: "rac-tours",
         type: "tours",
         title: "Tours",

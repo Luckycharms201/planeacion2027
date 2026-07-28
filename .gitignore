@@ -26,3 +26,6 @@ dist-ssr
 # bocetos de referencia (no parte de la app)
 ref.png
 pst.png
+
+# worktrees de sesiones de Claude Code (repos anidados, no van al historial)
+.claude/worktrees/
