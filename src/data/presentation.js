@@ -536,22 +536,34 @@ export const GROUPS = [
         subtitle: "Crear vinculaciones con propósito",
         pillars: [
           {
-            lead: "Agregar herramientas y vivencias en los Regresos a Casa basados en los intereses y etapas de vida del EXATEC.",
+            objetivo:
+              "Fortalecer la vinculación de la comunidad EXATEC con el Tec de Monterrey.",
+            prioridad:
+              "Crear vinculaciones con propósito, generando experiencias relevantes de acuerdo con los intereses y la etapa de vida de cada EXATEC.",
+            iniciativa:
+              "Evolucionar la experiencia de Regreso a Casa con una propuesta de valor diferenciada por generación:",
             // mapa aniversario → enfoque
             map: [
-              { tag: "RAC 5, 10 y 15", focus: "Formación continua, beneficios y servicios EXATEC" },
-              { tag: "RAC 20", focus: "Networking con sentido" },
-              { tag: "RAC 25, 30 y 35", focus: "Docencia, Inversión Educativa, Proyectos de Innovación e Impacto" },
-              { tag: "RAC 40 y más", focus: "Generosidad (Becas y Donativos), Docencia" },
+              { tag: "RAC 5, 10 y 15", focus: "Formación continua, beneficios y servicios EXATEC." },
+              { tag: "RAC 20", focus: "Networking con propósito." },
+              { tag: "RAC 25, 30 y 35", focus: "Docencia, inversión educativa y proyectos de innovación e impacto." },
+              { tag: "RAC 40 y más", focus: "Generosidad (becas y donativos) y docencia." },
             ],
           },
           {
-            lead: "Alinear agrupaciones y líderes de generación con los objetivos del departamento EXATEC.",
-            items: ["Eventos de Networking", "Generosidad / EXATEC Donando", "Voluntariado"],
+            objetivo:
+              "Incrementar la participación activa de los EXATEC en iniciativas estratégicas del Campus Monterrey.",
+            prioridad:
+              "Alinear a las Agrupaciones EXATEC y a los Líderes de Generación con los objetivos estratégicos del área para potenciar su impacto.",
+            iniciativa: "Impulsar la participación de la comunidad EXATEC en:",
+            items: ["Eventos de networking.", "Generosidad / EXATEC Donando.", "Voluntariado."],
           },
           {
-            lead: "Detectar a los EXATEC en las diferentes audiencias del Tec Campus MTY para fortalecer la vinculación con la institución.",
-            items: ["Mamás y Papás", "Profesores y Colaboradores", "Socios Formadores", "Donantes"],
+            objetivo: "Ampliar el alcance de la comunidad EXATEC.",
+            prioridad:
+              "Identificar oportunidades de vinculación con EXATEC presentes en las diferentes audiencias del Campus Monterrey.",
+            iniciativa: "Desarrollar estrategias de acercamiento para:",
+            items: ["Mamás y Papás.", "Profesores y Colaboradores.", "Socios Formadores.", "Donantes."],
           },
         ],
       },
