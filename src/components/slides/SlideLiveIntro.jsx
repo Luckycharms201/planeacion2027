@@ -38,7 +38,20 @@ export default function SlideLiveIntro({ slide }) {
         {slide.kicker ?? META.subtitle}
       </p>
 
-      <h1 className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-7xl font-black tracking-tight md:text-8xl">
+      {/* Lockup: el logo entra en la misma cascada que las palabras y se alinea
+          por línea base con ellas (altura = altura de mayúscula del título). */}
+      <h1
+        className="flex flex-wrap items-baseline justify-center gap-x-6 gap-y-2 font-black tracking-tight"
+        style={{ fontSize: 96, lineHeight: 1 }}
+      >
+        {slide.logo && (
+          <img
+            src={slide.logo}
+            alt={slide.logoAlt ?? META.title}
+            className="intro-word inline-block w-auto"
+            style={{ height: 69 }}
+          />
+        )}
         {words.map((w, i) => (
           <span key={i} className="intro-word inline-block">
             {w}

@@ -524,7 +524,11 @@ export const slideAt = (n) => SEQUENCE[n - 1] ?? null;
 export const LIVE_INTRO = {
   id: "live-intro",
   type: "liveIntro",
-  title: META.title,
+  // El lockup de la portada es "[logo EXATEC] Monterrey": el logo sustituye a
+  // la palabra EXATEC y va alineado por línea base con el resto del título.
+  logo: "/brand/logo-exatec-blanco.webp",
+  logoAlt: "EXATEC",
+  title: "Monterrey",
   kicker: META.subtitle,
   groupName: "Inicio",
   groupIndex: -1,
