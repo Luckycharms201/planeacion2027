@@ -12,7 +12,7 @@
 
 export const META = {
   title: "Mejores Prácticas Monterrey",
-  subtitle: "EXATEC 360",
+  subtitle: "Planeación 2027",
   logo: "/brand/logo-rac-blanco.png",
 };
 
