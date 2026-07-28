@@ -89,11 +89,11 @@ export default function SlidePrioridades({ slide }) {
       </div>
 
       {/* los tres pilares */}
-      <div className="grid min-h-0 flex-1 grid-cols-3 items-stretch gap-6">
+      <div className="grid min-h-0 flex-1 grid-cols-3 content-center items-stretch gap-6">
         {pillars.map((p, i) => (
           <div
             key={i}
-            className="pri-card group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-blue-700 bg-blue-900/40 p-5 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-[color:var(--color-accent)] hover:shadow-[0_0_34px_-10px_var(--color-accent)]"
+            className="pri-card group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-blue-700 bg-blue-900/40 p-4 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-[color:var(--color-accent)] hover:shadow-[0_0_34px_-10px_var(--color-accent)]"
           >
             {/* filo de luz superior */}
             <span
@@ -117,38 +117,38 @@ export default function SlidePrioridades({ slide }) {
               <span className="text-accent text-[10px] font-semibold tracking-[0.3em] uppercase">
                 Objetivo Estratégico {String(i + 1).padStart(2, "0")}
               </span>
-              <p className="text-text relative z-10 mt-1.5 text-[15px] leading-snug font-bold">
+              <p className="text-text relative z-10 mt-1.5 text-sm leading-snug font-bold">
                 {p.objetivo}
               </p>
             </div>
 
             {/* Prioridad */}
-            <div className="border-t border-blue-700/70 pt-3">
+            <div className="border-t border-blue-700/70 pt-2.5">
               <span className="text-text-dim text-[10px] font-semibold tracking-[0.25em] uppercase">
                 Prioridad
               </span>
-              <p className="text-text mt-1.5 text-[13px] leading-snug">
+              <p className="text-text mt-1.5 text-[12.5px] leading-snug">
                 {p.prioridad}
               </p>
             </div>
 
             {/* Iniciativas */}
-            <div className="flex min-h-0 flex-col border-t border-blue-700/70 pt-3">
+            <div className="flex min-h-0 flex-col border-t border-blue-700/70 pt-2.5">
               <span className="text-accent text-[10px] font-semibold tracking-[0.25em] uppercase">
                 Iniciativas
               </span>
-              <p className="text-text mt-1.5 text-[13px] leading-snug font-semibold">
+              <p className="text-text mt-1.5 text-[12.5px] leading-snug font-semibold">
                 {p.iniciativa}
               </p>
 
-              <div className="mt-2.5 flex flex-col gap-2">
+              <div className="mt-2 flex flex-col gap-1.5">
                 {/* mapa aniversario → enfoque */}
                 {p.map?.map((m, mi) => (
                   <div key={mi} className="pri-item border-l-2 border-blue-700 pl-3">
                     <span className="bg-accent/10 text-accent border-accent/40 inline-block rounded-full border px-2 py-0.5 text-[10px] font-bold tracking-wide">
                       {m.tag}
                     </span>
-                    <p className="text-text-dim mt-0.5 text-[12.5px] leading-snug">
+                    <p className="text-text-dim mt-0.5 text-[12px] leading-snug">
                       {m.focus}
                     </p>
                   </div>
@@ -158,7 +158,7 @@ export default function SlidePrioridades({ slide }) {
                 {p.items?.map((it, ii) => (
                   <div key={ii} className="pri-item flex items-center gap-2.5">
                     <span className="bg-accent h-1.5 w-1.5 shrink-0 rotate-45" />
-                    <span className="text-text text-[13px] font-semibold leading-snug">
+                    <span className="text-text text-[12.5px] font-semibold leading-snug">
                       {it}
                     </span>
                   </div>

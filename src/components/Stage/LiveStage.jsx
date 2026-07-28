@@ -74,7 +74,7 @@ export default function LiveStage({
       </div>
 
       {/* barra de progreso segmentada */}
-      <div className="flex flex-col gap-2.5 px-10 pb-6">
+      <div className="flex shrink-0 flex-col gap-2.5 px-10 pt-5 pb-6">
         <LiveProgressBar liveN={liveN} onSelect={onSelectSlide} />
       </div>
     </div>
