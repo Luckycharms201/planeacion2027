@@ -44,14 +44,14 @@ export default function SlidePrioridades({ slide }) {
   });
 
   return (
-    <div ref={scope} className="flex h-full w-full flex-col gap-3 py-1">
+    <div ref={scope} className="flex h-full w-full flex-col gap-2 py-1">
       {/* encabezado: título + subtítulo-tesis con gradiente de acento */}
       <div>
-        <h2 className="pri-title text-text font-display text-4xl font-extrabold tracking-tight">
+        <h2 className="pri-title text-text font-display text-[2rem] font-extrabold tracking-tight">
           {slide.title}
         </h2>
         <p
-          className="pri-sub mt-1.5 bg-clip-text text-2xl font-extrabold tracking-tight text-transparent"
+          className="pri-sub mt-1 bg-clip-text text-xl font-extrabold tracking-tight text-transparent"
           style={{
             backgroundImage:
               "linear-gradient(90deg, var(--color-accent) 0%, var(--color-blue-500) 70%)",
@@ -62,7 +62,7 @@ export default function SlidePrioridades({ slide }) {
       </div>
 
       {/* el hilo de vinculación: línea + un nodo por pilar */}
-      <div className="relative h-6 shrink-0" aria-hidden="true">
+      <div className="relative h-5 shrink-0" aria-hidden="true">
         <div
           className="pri-linea absolute top-1/2 right-0 left-0 h-[2px] -translate-y-1/2 rounded-full"
           style={{
@@ -93,7 +93,7 @@ export default function SlidePrioridades({ slide }) {
         {pillars.map((p, i) => (
           <div
             key={i}
-            className="pri-card group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-blue-700 bg-blue-900/40 p-4 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-[color:var(--color-accent)] hover:shadow-[0_0_34px_-10px_var(--color-accent)]"
+            className="pri-card group relative flex flex-col gap-2.5 overflow-hidden rounded-2xl border border-blue-700 bg-blue-900/40 p-3.5 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-[color:var(--color-accent)] hover:shadow-[0_0_34px_-10px_var(--color-accent)]"
           >
             {/* filo de luz superior */}
             <span
@@ -123,7 +123,7 @@ export default function SlidePrioridades({ slide }) {
             </div>
 
             {/* Prioridad */}
-            <div className="border-t border-blue-700/70 pt-2.5">
+            <div className="border-t border-blue-700/70 pt-2">
               <span className="text-text-dim text-[10px] font-semibold tracking-[0.25em] uppercase">
                 Prioridad
               </span>
@@ -133,7 +133,7 @@ export default function SlidePrioridades({ slide }) {
             </div>
 
             {/* Iniciativas */}
-            <div className="flex min-h-0 flex-col border-t border-blue-700/70 pt-2.5">
+            <div className="flex min-h-0 flex-col border-t border-blue-700/70 pt-2">
               <span className="text-accent text-[10px] font-semibold tracking-[0.25em] uppercase">
                 Iniciativas
               </span>
