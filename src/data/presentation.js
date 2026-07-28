@@ -11,7 +11,9 @@
  */
 
 export const META = {
-  title: "Mejores Prácticas Monterrey",
+  // `title` es la etiqueta de la barra superior en las slides bookend
+  // (portada y cierre); `subtitle`, el kicker de la portada.
+  title: "Ciclo 2025/26",
   subtitle: "Planeación 2027",
   logo: "/brand/logo-rac-blanco.png",
 };

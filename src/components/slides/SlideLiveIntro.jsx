@@ -47,7 +47,7 @@ export default function SlideLiveIntro({ slide }) {
         {slide.logo && (
           <img
             src={slide.logo}
-            alt={slide.logoAlt ?? META.title}
+            alt={slide.logoAlt ?? slide.title}
             className="intro-word inline-block w-auto"
             style={{ height: 69 }}
           />

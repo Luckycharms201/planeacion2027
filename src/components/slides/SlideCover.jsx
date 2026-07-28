@@ -39,7 +39,7 @@ export default function SlideCover({ slide }) {
     >
       <img
         src={slide.logo ?? META.logo}
-        alt={slide.logoAlt ?? META.title}
+        alt={slide.logoAlt ?? slide.title}
         className="cover-logo h-12 w-auto opacity-90"
       />
 

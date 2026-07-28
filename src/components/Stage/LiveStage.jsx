@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { SLIDE_COMPONENTS, SlideGeneric } from "../slides/slideRegistry";
+import { META } from "../../data/presentation";
 import LiveProgressBar from "./LiveProgressBar";
 
 /**
@@ -38,7 +39,7 @@ export default function LiveStage({ slide, liveN, total, isFullscreen }) {
       {/* barra superior: área + contador */}
       <div className="flex items-center justify-between px-10 pt-7">
         <span className="text-text-dim text-xs tracking-[0.25em] uppercase">
-          {isBookend ? "Mejores Prácticas · Monterrey" : slide.groupName}
+          {isBookend ? META.title : slide.groupName}
         </span>
         <span className="text-text-dim tabular text-xs tracking-[0.25em] uppercase">
           {String(liveN).padStart(2, "0")} / {String(total).padStart(2, "0")}
