@@ -561,6 +561,15 @@ export const INDICADORES = {
     { name: "NPS", prev: 56, curr: 65, meta: null },
   ],
   total: { name: "Total", prev: 7708, curr: 8454, meta: 9389 },
+  /**
+   * Segundo total, calculado restando del anterior las filas listadas en
+   * `exclude` (por `name`). Se deriva en el componente, no se escribe a mano,
+   * para que siga cuadrando si se corrige cualquier cifra de `rows`.
+   */
+  totalExcluding: {
+    label: "Total ajustado",
+    exclude: ["Vinculados Estratégicamente", "EXATEC Donando"],
+  },
   groupName: "Indicadores",
   groupIndex: -1,
 };

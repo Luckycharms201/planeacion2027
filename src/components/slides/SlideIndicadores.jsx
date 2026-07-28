@@ -207,11 +207,120 @@ function IndicadorCard({ row, prevLabel, currLabel, delay }) {
   );
 }
 
+/**
+ * Panel de un total. `accent` lo marca como el dato principal de la pantalla
+ * (único con cyan); el resto usa el mismo tratamiento neutro de las tarjetas.
+ */
+function TotalPanel({ label, note, prev, curr, meta, prevLabel, accent, delay }) {
+  const change = curr / prev - 1;
+  const vsMeta = curr / meta;
+
+  return (
+    <div
+      className="ind-hero flex flex-col justify-between rounded-2xl"
+      style={{
+        padding: "14px 22px 16px",
+        width: 330,
+        background: accent
+          ? "linear-gradient(140deg, rgba(70,229,255,0.10), rgba(12,26,58,0.6))"
+          : "linear-gradient(158deg, rgba(21,52,138,0.38), rgba(12,26,58,0.55))",
+        border: accent
+          ? "1px solid rgba(70,229,255,0.28)"
+          : "1px solid rgba(138,155,196,0.16)",
+        boxShadow: accent ? "0 0 46px -14px rgba(70,229,255,0.5)" : "none",
+      }}
+    >
+      <div>
+        <p
+          className="text-text-dim font-semibold uppercase"
+          style={{ fontSize: 10, letterSpacing: "0.26em" }}
+        >
+          {label}
+        </p>
+        {note && (
+          <p
+            className="text-text-dim"
+            style={{ fontSize: 9.5, lineHeight: 1.35, marginTop: 3 }}
+          >
+            {note}
+          </p>
+        )}
+
+        <div className="mt-1 flex items-baseline gap-3">
+          <span
+            className={`font-display font-black tracking-tight ${
+              accent ? "text-accent" : "text-text"
+            }`}
+            style={{ fontSize: 56, lineHeight: 1 }}
+          >
+            <CountUp value={curr} duration={2.2} delay={delay} />
+          </span>
+          <span
+            className="flex items-center gap-1.5 font-semibold"
+            style={{ fontSize: 14, color: change >= 0 ? POS : NEG }}
+          >
+            <Trend up={change >= 0} />
+            {pct1(Math.abs(change))}
+          </span>
+        </div>
+
+        <p className="text-text-dim tabular" style={{ fontSize: 11, marginTop: 2 }}>
+          {num(prev)} en {prevLabel}
+        </p>
+      </div>
+
+      <div className="mt-2.5">
+        <div
+          className="relative w-full overflow-hidden rounded-full"
+          style={{ height: 9, background: "rgba(138,155,196,0.16)" }}
+        >
+          <div
+            className="ind-hero-fill h-full rounded-full"
+            style={{
+              width: `${Math.min(vsMeta, 1) * 100}%`,
+              transformOrigin: "left center",
+              background: accent
+                ? "linear-gradient(90deg, var(--color-blue-500), var(--color-accent))"
+                : "linear-gradient(90deg, var(--color-blue-700), var(--color-blue-500))",
+            }}
+          />
+        </div>
+        <div
+          className="mt-1.5 flex items-baseline justify-between tabular"
+          style={{ fontSize: 11 }}
+        >
+          <span className="text-text font-semibold">
+            {pct1(vsMeta)} de la meta
+          </span>
+          <span className="text-text-dim">{num(meta)}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function SlideIndicadores({ slide }) {
   const rows = slide.rows ?? [];
   const total = slide.total;
-  const totalChange = total.curr / total.prev - 1;
-  const totalVsMeta = total.curr / total.meta;
+
+  /**
+   * Total ajustado: el total del Excel menos las filas excluidas. Se resta
+   * (en vez de sumar el resto) para que herede exactamente lo que ese total
+   * contenga, sea lo que sea.
+   */
+  const alt = slide.totalExcluding;
+  const excluded = alt
+    ? rows.filter((r) => alt.exclude.includes(r.name))
+    : [];
+  const altTotal = alt
+    ? ["prev", "curr", "meta"].reduce(
+        (acc, k) => ({
+          ...acc,
+          [k]: excluded.reduce((sum, r) => sum - (r[k] ?? 0), total[k]),
+        }),
+        {}
+      )
+    : null;
 
   const scope = useSlideTimeline((tl) => {
     tl.from(".sh-kicker", { opacity: 0, y: 12, duration: 0.5 })
@@ -220,8 +329,16 @@ export default function SlideIndicadores({ slide }) {
         { opacity: 0, y: 24, filter: "blur(10px)", duration: 0.7 },
         "-=0.2"
       )
-      .from(".ind-hero", { opacity: 0, x: 30, duration: 0.7 }, "-=0.4")
-      .from(".ind-hero-fill", { scaleX: 0, duration: 1, ease: "power3.out" }, "-=0.3")
+      .from(
+        ".ind-hero",
+        { opacity: 0, x: 30, duration: 0.7, stagger: 0.1 },
+        "-=0.4"
+      )
+      .from(
+        ".ind-hero-fill",
+        { scaleX: 0, duration: 1, stagger: 0.1, ease: "power3.out" },
+        "-=0.3"
+      )
       .from(
         ".ind-card",
         { opacity: 0, y: 26, duration: 0.55, stagger: 0.07, ease: "power3.out" },
@@ -236,73 +353,35 @@ export default function SlideIndicadores({ slide }) {
 
   return (
     <div ref={scope} className="flex h-full w-full flex-col gap-4 py-1">
-      {/* encabezado + total, en la misma banda para ganar altura abajo */}
-      <div className="flex items-center justify-between gap-10">
+      {/* encabezado + totales, en la misma banda para ganar altura abajo */}
+      <div className="flex items-center justify-between gap-8">
         <SlideHeading kicker={slide.kicker} title={slide.title} />
 
-        {/* panel del total: único bloque con acento en la pantalla */}
-        <div
-          className="ind-hero flex items-center gap-8 rounded-2xl"
-          style={{
-            padding: "16px 26px",
-            background:
-              "linear-gradient(140deg, rgba(70,229,255,0.10), rgba(12,26,58,0.6))",
-            border: "1px solid rgba(70,229,255,0.28)",
-            boxShadow: "0 0 46px -14px rgba(70,229,255,0.5)",
-          }}
-        >
-          <div>
-            <p
-              className="text-text-dim font-semibold uppercase"
-              style={{ fontSize: 10, letterSpacing: "0.28em" }}
-            >
-              Total {slide.currLabel}
-            </p>
-            <div className="mt-0.5 flex items-baseline gap-3.5">
-              <span
-                className="text-accent font-display font-black tracking-tight"
-                style={{ fontSize: 66, lineHeight: 1 }}
-              >
-                <CountUp value={total.curr} duration={2.2} delay={0.3} />
-              </span>
-              <span
-                className="flex items-center gap-1.5 font-semibold"
-                style={{ fontSize: 15, color: POS }}
-              >
-                <Trend up={totalChange >= 0} />
-                {pct1(Math.abs(totalChange))}
-              </span>
-            </div>
-            <p className="text-text-dim tabular mt-1" style={{ fontSize: 11.5 }}>
-              {num(total.prev)} en {slide.prevLabel}
-            </p>
-          </div>
+        <div className="flex items-stretch gap-4">
+          <TotalPanel
+            label={`Total ${slide.currLabel}`}
+            /* la nota va en ambos paneles para que las cifras queden a la
+               misma altura y el contraste entre los dos totales sea explícito */
+            note="todos los indicadores"
+            prev={total.prev}
+            curr={total.curr}
+            meta={total.meta}
+            prevLabel={slide.prevLabel}
+            accent
+            delay={0.3}
+          />
 
-          <div style={{ width: 190 }}>
-            <div
-              className="relative w-full overflow-hidden rounded-full"
-              style={{ height: 9, background: "rgba(138,155,196,0.18)" }}
-            >
-              <div
-                className="ind-hero-fill h-full rounded-full"
-                style={{
-                  width: `${totalVsMeta * 100}%`,
-                  transformOrigin: "left center",
-                  background:
-                    "linear-gradient(90deg, var(--color-blue-500), var(--color-accent))",
-                }}
-              />
-            </div>
-            <div
-              className="mt-2 flex items-baseline justify-between tabular"
-              style={{ fontSize: 11.5 }}
-            >
-              <span className="text-text font-semibold">
-                {pct1(totalVsMeta)} de la meta
-              </span>
-              <span className="text-text-dim">{num(total.meta)}</span>
-            </div>
-          </div>
+          {altTotal && (
+            <TotalPanel
+              label={alt.label}
+              note={`sin ${excluded.map((r) => r.name).join(" ni ")}`}
+              prev={altTotal.prev}
+              curr={altTotal.curr}
+              meta={altTotal.meta}
+              prevLabel={slide.prevLabel}
+              delay={0.42}
+            />
+          )}
         </div>
       </div>
 
