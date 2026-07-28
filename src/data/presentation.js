@@ -474,10 +474,10 @@ export const GROUPS = [
         title: "Regreso a Casa",
         kicker: "Aprendizajes",
         items: [
-          "Diversificar los canales de comunicación para fortalecer el alcance y la participación",
-          "Anticipar el cierre de registros y la solicitud de materiales",
-          "Estandarizar la identidad visual y los elementos de producción",
-          "Potenciar el componente de nostalgia",
+          "Diversificar los canales de comunicación para fortalecer el alcance y la participación.",
+          "Anticipar el cierre de registros y la solicitud de materiales.",
+          "Estandarizar la identidad visual y los elementos de producción.",
+          "Potenciar el componente de nostalgia.",
         ],
       },
       {
@@ -488,7 +488,7 @@ export const GROUPS = [
         items: [
           "Definir desde el inicio del ciclo una planeación, calendarización y reglas de operación.",
           "Alinear los proyectos y eventos de las agrupaciones con las prioridades estratégicas del equipo.",
-          "Establecer reuniones periódicas con las presidencias",
+          "Establecer reuniones periódicas con las presidencias.",
         ],
       },
       {
@@ -498,8 +498,8 @@ export const GROUPS = [
         kicker: "Aprendizajes",
         items: [
           "Ampliar el número de personas capacitadas para dar tours para ofrecer una mejor experiencia.",
-          "Integrar puntos de contacto en cada espacio",
-          "Fortalecer la preparación logística",
+          "Integrar puntos de contacto en cada espacio.",
+          "Fortalecer la preparación logística.",
         ],
       },
       {
@@ -508,9 +508,9 @@ export const GROUPS = [
         title: "Líderes de Generación",
         kicker: "Aprendizajes",
         items: [
-          "Fortalecer la colaboración con el equipo de LiFE",
-          "Generar una mayor vinculación con las direcciones académicas",
-          "Incorporar dentro del journey del candidato a graduar un evento insignia",
+          "Fortalecer la colaboración con el equipo de LiFE.",
+          "Generar una mayor vinculación con las direcciones académicas.",
+          "Incorporar dentro del journey del candidato a graduar un evento insignia.",
         ],
       },
       // cierre de toda la presentación: se queda como última slide del recorrido
