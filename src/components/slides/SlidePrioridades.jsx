@@ -44,14 +44,14 @@ export default function SlidePrioridades({ slide }) {
   });
 
   return (
-    <div ref={scope} className="flex h-full w-full flex-col gap-4 py-2">
+    <div ref={scope} className="flex h-full w-full flex-col gap-3 py-1">
       {/* encabezado: título + subtítulo-tesis con gradiente de acento */}
       <div>
-        <h2 className="pri-title text-text font-display text-4xl font-extrabold tracking-tight md:text-5xl">
+        <h2 className="pri-title text-text font-display text-3xl font-extrabold tracking-tight md:text-4xl">
           {slide.title}
         </h2>
         <p
-          className="pri-sub mt-2 bg-clip-text text-2xl font-extrabold tracking-tight text-transparent md:text-3xl"
+          className="pri-sub mt-1.5 bg-clip-text text-xl font-extrabold tracking-tight text-transparent md:text-2xl"
           style={{
             backgroundImage:
               "linear-gradient(90deg, var(--color-accent) 0%, var(--color-blue-500) 70%)",
@@ -62,7 +62,7 @@ export default function SlidePrioridades({ slide }) {
       </div>
 
       {/* el hilo de vinculación: línea + un nodo por pilar */}
-      <div className="relative h-8 shrink-0" aria-hidden="true">
+      <div className="relative h-6 shrink-0" aria-hidden="true">
         <div
           className="pri-linea absolute top-1/2 right-0 left-0 h-[2px] -translate-y-1/2 rounded-full"
           style={{
@@ -93,7 +93,7 @@ export default function SlidePrioridades({ slide }) {
         {pillars.map((p, i) => (
           <div
             key={i}
-            className="pri-card group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-blue-700 bg-blue-900/40 p-7 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-[color:var(--color-accent)] hover:shadow-[0_0_34px_-10px_var(--color-accent)]"
+            className="pri-card group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-blue-700 bg-blue-900/40 p-5 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-[color:var(--color-accent)] hover:shadow-[0_0_34px_-10px_var(--color-accent)]"
           >
             {/* filo de luz superior */}
             <span
@@ -107,7 +107,7 @@ export default function SlidePrioridades({ slide }) {
             {/* numeral gigante de fondo */}
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute -top-7 -right-2 text-[7.5rem] leading-none font-black text-blue-500/10 select-none"
+              className="pointer-events-none absolute -top-5 -right-1 text-[6rem] leading-none font-black text-blue-500/10 select-none"
             >
               {String(i + 1).padStart(2, "0")}
             </span>
@@ -116,18 +116,18 @@ export default function SlidePrioridades({ slide }) {
               Prioridad {String(i + 1).padStart(2, "0")}
             </span>
 
-            <p className="text-text relative z-10 text-lg leading-snug font-bold">
+            <p className="text-text relative z-10 text-base leading-snug font-bold">
               {p.lead}
             </p>
 
-            <div className="mt-1 flex min-h-0 flex-1 flex-col justify-start gap-3">
+            <div className="flex min-h-0 flex-1 flex-col justify-start gap-2.5">
               {/* pilar con mapa aniversario → enfoque */}
               {p.map?.map((m, mi) => (
                 <div key={mi} className="pri-item border-l-2 border-blue-700 pl-3.5">
                   <span className="bg-accent/10 text-accent border-accent/40 inline-block rounded-full border px-2.5 py-0.5 text-[11px] font-bold tracking-wide">
                     {m.tag}
                   </span>
-                  <p className="text-text-dim mt-1 text-sm leading-snug">
+                  <p className="text-text-dim mt-0.5 text-[13px] leading-snug">
                     {m.focus}
                   </p>
                 </div>
@@ -137,7 +137,7 @@ export default function SlidePrioridades({ slide }) {
               {p.items?.map((it, ii) => (
                 <div key={ii} className="pri-item flex items-center gap-3">
                   <span className="bg-accent h-1.5 w-1.5 shrink-0 rotate-45" />
-                  <span className="text-text text-[15px] font-semibold leading-snug">
+                  <span className="text-text text-sm font-semibold leading-snug">
                     {it}
                   </span>
                 </div>
