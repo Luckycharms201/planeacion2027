@@ -27,6 +27,10 @@ export function useSlideTimeline(build) {
       });
       build(tl, self);
       tl.play(0);
+      // escape para capturas/QA: con ?noanim la entrada salta a su estado final
+      if (new URLSearchParams(window.location.search).has("noanim")) {
+        tl.progress(1);
+      }
       self.timeline = tl;
     }, scope);
     return () => ctx.revert();

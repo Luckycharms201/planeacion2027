@@ -47,11 +47,11 @@ export default function SlidePrioridades({ slide }) {
     <div ref={scope} className="flex h-full w-full flex-col gap-3 py-1">
       {/* encabezado: título + subtítulo-tesis con gradiente de acento */}
       <div>
-        <h2 className="pri-title text-text font-display text-3xl font-extrabold tracking-tight md:text-4xl">
+        <h2 className="pri-title text-text font-display text-4xl font-extrabold tracking-tight">
           {slide.title}
         </h2>
         <p
-          className="pri-sub mt-1.5 bg-clip-text text-xl font-extrabold tracking-tight text-transparent md:text-2xl"
+          className="pri-sub mt-1.5 bg-clip-text text-2xl font-extrabold tracking-tight text-transparent"
           style={{
             backgroundImage:
               "linear-gradient(90deg, var(--color-accent) 0%, var(--color-blue-500) 70%)",
@@ -73,7 +73,7 @@ export default function SlidePrioridades({ slide }) {
         />
         {/* misma retícula que los pilares → cada nodo cae exactamente al
             centro de su tarjeta */}
-        <div className="grid h-full grid-cols-1 gap-8 lg:grid-cols-3">
+        <div className="grid h-full grid-cols-3 gap-8">
           {[1, 2, 3].map((n) => (
             <span key={n} className="flex items-center justify-center">
               <span className="pri-nodo relative">
@@ -89,7 +89,7 @@ export default function SlidePrioridades({ slide }) {
       </div>
 
       {/* los tres pilares */}
-      <div className="grid min-h-0 flex-1 grid-cols-1 items-stretch gap-8 lg:grid-cols-3">
+      <div className="grid min-h-0 flex-1 grid-cols-3 items-stretch gap-8">
         {pillars.map((p, i) => (
           <div
             key={i}
