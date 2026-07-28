@@ -366,12 +366,13 @@ export const GROUPS = [
         title: "Generosidad - Total Recaudado por Agrupaciones",
         kicker: "Impacto de la comunidad",
         // suma exacta del desglose de abajo
-        total: 373342,
+        total: 417881,
         // ordenado de mayor a menor: el acento (fila 0) resalta el dominante
         breakdown: [
           { name: "Borregos Flag Cup", amount: 186200 },
           { name: "EXATEC Wealth Strategy", amount: 90000 },
           { name: "Arte, Cultura y Conexión", amount: 70000 },
+          { name: "Jerseys Versión Jugador", amount: 44539 },
           { name: "Otros", amount: 27142 },
         ],
       },
