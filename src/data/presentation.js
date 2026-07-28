@@ -536,9 +536,40 @@ export const LIVE_INTRO = {
   groupIndex: -1,
 };
 
-export const LIVE_SEQUENCE = [LIVE_INTRO, ...SEQUENCE].map((item, i) => ({
-  ...item,
-  liveN: i + 1,
-}));
+/**
+ * Slide 2 · INDICADORES — tablero de resultados del ciclo.
+ * Fuente: "Indicadores - Planeación.xlsx" (raíz del proyecto).
+ * Solo se guardan las cifras crudas; los porcentajes (vs ciclo pasado y
+ * vs meta) se derivan en el componente para que no haya dos verdades.
+ * `meta: null` = indicador sin meta definida (NPS).
+ */
+export const INDICADORES = {
+  id: "indicadores",
+  type: "indicadores",
+  kicker: "2024/25 → 2025/26",
+  title: "Indicadores",
+  prevLabel: "2024-25",
+  currLabel: "2025-26",
+  rows: [
+    { name: "Voluntarios", prev: 224, curr: 380, meta: 530 },
+    { name: "Registrados LDG", prev: 238, curr: 294, meta: 265 },
+    { name: "LDG", prev: 466, curr: 444, meta: 530 },
+    { name: "Registrados RAC", prev: 2088, curr: 1717, meta: 2550 },
+    { name: "Networking", prev: 2720, curr: 3381, meta: 3340 },
+    { name: "Vinculados Estratégicamente", prev: 464, curr: 690, meta: 714 },
+    { name: "EXATEC Donando", prev: 1452, curr: 1483, meta: 1460 },
+    { name: "NPS", prev: 56, curr: 65, meta: null },
+  ],
+  total: { name: "Total", prev: 7708, curr: 8454, meta: 9389 },
+  groupName: "Indicadores",
+  groupIndex: -1,
+};
+
+export const LIVE_SEQUENCE = [LIVE_INTRO, INDICADORES, ...SEQUENCE].map(
+  (item, i) => ({
+    ...item,
+    liveN: i + 1,
+  })
+);
 
 export const LIVE_TOTAL = LIVE_SEQUENCE.length;

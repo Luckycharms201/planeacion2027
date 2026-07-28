@@ -17,6 +17,7 @@ import SlideEquipo from "./SlideEquipo";
 import SlideJourney from "./SlideJourney";
 import SlideJourneyPopup from "./SlideJourneyPopup";
 import SlideLiveIntro from "./SlideLiveIntro";
+import SlideIndicadores from "./SlideIndicadores";
 
 /**
  * Registro tipo → componente de slide. Fuente única para <Stage> y <LiveStage>.
@@ -41,6 +42,7 @@ export const SLIDE_COMPONENTS = {
   journey: SlideJourney,
   journeyPopup: SlideJourneyPopup,
   liveIntro: SlideLiveIntro,
+  indicadores: SlideIndicadores,
 };
 
 export { SlideGeneric };
