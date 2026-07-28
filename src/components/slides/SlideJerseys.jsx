@@ -26,12 +26,12 @@ export default function SlideJerseys({ slide }) {
 
       <div className="jer-card flex min-h-0 flex-1 gap-10 rounded-2xl border border-blue-700 bg-blue-900/40 p-8">
         {/* datos */}
-        <div className="flex min-w-0 flex-1 flex-col justify-center gap-9">
+        <div className="flex min-w-0 flex-1 flex-col justify-center gap-12">
           <div>
-            <span className="text-text-dim text-xs tracking-[0.3em] uppercase">
+            <span className="text-text-dim text-sm tracking-[0.3em] uppercase">
               Recaudado
             </span>
-            <div className="text-accent mt-1 text-8xl font-black leading-none">
+            <div className="text-accent mt-2 text-[10rem] font-black leading-[0.85] tracking-tight">
               <CountUp value={slide.raised} prefix="$" duration={2} delay={0.4} />
             </div>
           </div>
@@ -39,10 +39,10 @@ export default function SlideJerseys({ slide }) {
           <div className="flex flex-wrap gap-x-12 gap-y-6">
             {slide.stats?.map((s, i) => (
               <div key={i}>
-                <div className="text-text text-6xl font-black leading-none">
+                <div className="text-text text-[7rem] font-black leading-none">
                   <CountUp value={s.value} duration={1.6} delay={0.6 + i * 0.12} />
                 </div>
-                <span className="text-text-dim mt-2 block text-base">
+                <span className="text-text-dim mt-3 block text-xl">
                   {s.label}
                 </span>
               </div>
@@ -52,7 +52,7 @@ export default function SlideJerseys({ slide }) {
 
         {/* video vertical */}
         {slide.video && (
-          <div className="relative min-h-0 w-[26%] shrink-0 overflow-hidden rounded-xl">
+          <div className="relative -my-8 aspect-[9/16] shrink-0 self-stretch overflow-hidden rounded-xl">
             <Placeholder
               kind="video"
               n={slide.video.n}
