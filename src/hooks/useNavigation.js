@@ -27,7 +27,11 @@ export function useNavigation() {
   // el sitio arranca directo en la presentación (modo live), sin hub
   const [view, setView] = useState("live");
   const [currentN, setCurrentN] = useState(1);
-  const [liveN, setLiveN] = useState(1);
+  // ?n=<slide> permite arrancar en una slide específica (deep link / QA)
+  const [liveN, setLiveN] = useState(() => {
+    const n = Number(new URLSearchParams(window.location.search).get("n"));
+    return Number.isInteger(n) && n >= 1 && n <= LIVE_TOTAL ? n : 1;
+  });
   const [focusedGroupIndex, setFocusedGroupIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(
     () => !!document.fullscreenElement

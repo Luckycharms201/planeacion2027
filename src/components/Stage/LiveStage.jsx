@@ -52,8 +52,10 @@ export default function LiveStage({
         </span>
       </div>
 
-      {/* contenido de la slide — capas superpuestas para el crossfade */}
-      <div className="relative min-h-0 flex-1">
+      {/* contenido de la slide — capas superpuestas para el crossfade.
+          overflow-hidden: ninguna slide puede pintarse fuera de su área
+          (p.ej. durante la animación de entrada) ni encimarse a las barras. */}
+      <div className="relative min-h-0 flex-1 overflow-hidden">
         {layers.map((ly, i) => {
           const SlideComponent = SLIDE_COMPONENTS[ly.type] ?? SlideGeneric;
           const isTop = i === layers.length - 1;
