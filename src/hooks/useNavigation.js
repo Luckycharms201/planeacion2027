@@ -70,6 +70,13 @@ export function useNavigation() {
     setView("hub");
   }, []);
 
+  // salto directo a una slide del modo live (click en la barra de progreso).
+  const goToLive = useCallback((n) => {
+    const clamped = Math.min(Math.max(Math.round(n), 1), LIVE_TOTAL);
+    setLiveN(clamped);
+    setView("live");
+  }, []);
+
   // navegación circular: tras la última slide vuelve a la primera y viceversa.
   const next = useCallback(() => {
     if (view === "live") {
@@ -206,6 +213,7 @@ export function useNavigation() {
     goToHub,
     startLive,
     exitLive,
+    goToLive,
     next,
     prev,
     toggleFullscreen,

@@ -14,7 +14,13 @@ import LiveProgressBar from "./LiveProgressBar";
  * mientras la entrante aparece con su propia animación de entrada (GSAP). El
  * chrome (barras superior/inferior) se actualiza al instante, no cruza.
  */
-export default function LiveStage({ slide, liveN, total, isFullscreen }) {
+export default function LiveStage({
+  slide,
+  liveN,
+  total,
+  isFullscreen,
+  onSelectSlide,
+}) {
   // capas activas: normalmente 1; durante la transición, [saliente, entrante].
   const [layers, setLayers] = useState(() => (slide ? [slide] : []));
   const topIdRef = useRef(slide?.id);
@@ -67,7 +73,7 @@ export default function LiveStage({ slide, liveN, total, isFullscreen }) {
 
       {/* barra de progreso segmentada */}
       <div className="flex flex-col gap-2.5 px-10 pb-6">
-        <LiveProgressBar liveN={liveN} />
+        <LiveProgressBar liveN={liveN} onSelect={onSelectSlide} />
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ import SlideTalleres from "./SlideTalleres";
 import SlideTorneos from "./SlideTorneos";
 import SlideMonto from "./SlideMonto";
 import SlideRetos from "./SlideRetos";
+import SlideAprendizajes from "./SlideAprendizajes";
 import SlideAgrupacionesList from "./SlideAgrupacionesList";
 import SlideEmbed from "./SlideEmbed";
 import SlideGafetes from "./SlideGafetes";
@@ -35,6 +36,7 @@ export const SLIDE_COMPONENTS = {
   torneos: SlideTorneos,
   monto: SlideMonto,
   retos: SlideRetos,
+  aprendizajes: SlideAprendizajes,
   agrupacionesList: SlideAgrupacionesList,
   embed: SlideEmbed,
   gafetes: SlideGafetes,

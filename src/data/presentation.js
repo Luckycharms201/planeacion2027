@@ -283,17 +283,9 @@ export const GROUPS = [
       {
         id: "rac-retos",
         type: "retos",
-        title: "Retos RAC",
+        title: "Lowlights",
         kicker: "Regreso a Casa",
         items: [
-          {
-            lead: "Asignación personalizada de mesas",
-            body: "Llamadas 1 a 1 para definir la integración de mesas por generación, considerando preferencias de ubicación e integrantes.",
-          },
-          {
-            lead: "Personalización manual de gafetes",
-            body: "Elaboración de gafetes con información personalizada (nombre, número de mesa y número de tour).",
-          },
           {
             lead: "Convocatoria y asistencia al evento",
             body: "Requiere una estrategia de difusión multicanal (WhatsApp, LinkedIn, correo, radio, redes sociales y pauta digital) para impulsar la participación.",
@@ -320,32 +312,9 @@ export const GROUPS = [
         id: "agr-portada",
         type: "cover",
         title: "Agrupaciones",
-        kicker: "Rediseño de Experiencia · Monterrey",
+        kicker: "Nuevos eventos con causa por agrupaciones · Monterrey",
         logo: "/brand/logo-exatec-blanco.webp",
         logoAlt: "EXATEC",
-      },
-      {
-        id: "agr-lista",
-        type: "agrupacionesList",
-        kicker: "Agrupaciones",
-        count: 14,
-        label: "agrupaciones EXATEC en Monterrey",
-        names: [
-          "Asociación EXATEC Contaduría Pública",
-          "Asociación EXATEC Ingeniería Industrial",
-          "Asociación EXATEC Relaciones Internacionales",
-          "Asociación EXATEC Arquitectura",
-          "Asociación EXATEC Mujeres Empresarias y Ejecutivas",
-          "Club EXATEC en el Arte",
-          "Club EXATEC Profesionistas",
-          "Club EXATEC Empresarial Monterrey",
-          "Club EXATEC Running Monterrey",
-          "Club EXATEC Ciclismo",
-          "Club EXATEC Básquetbol",
-          "Club EXATEC Futbol Americano",
-          "Club EXATEC Natación",
-          "Fraternidad Ricardo R Guajardo",
-        ],
       },
       {
         id: "agr-talleres",
@@ -361,18 +330,6 @@ export const GROUPS = [
         placeholders: [
           { n: 1, kind: "image", note: "Taller", src: "/media/taller_1.webp", alt: "Taller · Educación Continua" },
           { n: 2, kind: "image", note: "Taller", src: "/media/taller_2.webp", alt: "Taller · Educación Continua" },
-        ],
-      },
-      {
-        id: "agr-video-testimonios",
-        type: "videoTrio",
-        title: "Video · Testimonios",
-        // 3 videos verticales en simultáneo (izq→der). El central lleva sonido
-        // y no se loopea; los laterales corren muteados en loop.
-        videos: [
-          { src: "/media/testimonio1.mp4", loop: true, muted: true },
-          { src: "/media/testimonio2.mp4", loop: false, muted: false },
-          { src: "/media/testimonio3.mp4", loop: true, muted: true },
         ],
       },
       {
@@ -392,33 +349,37 @@ export const GROUPS = [
               { value: 76, label: "Papás EXATEC" },
             ],
           },
-          {
-            name: "Golf",
-            raised: 516800,
-            photo: { n: 2, note: "Torneo de Golf", src: "/media/golf.webp", alt: "Torneo de Golf" },
-            stats: [{ value: 120, label: "Participantes" }],
-          },
         ],
-      },
-      {
-        id: "agr-video-tochito",
-        type: "video",
-        title: "Video · Torneo de Tochito",
-        placeholders: [{ n: 1, kind: "video", note: "Video torneo tochito", src: "/media/tochito.mp4" }],
       },
       {
         id: "agr-monto",
         type: "monto",
         title: "Generosidad - Total Recaudado por Agrupaciones",
         kicker: "Impacto de la comunidad",
-        total: 890142,
+        // suma exacta del desglose de abajo
+        total: 373342,
         // ordenado de mayor a menor: el acento (fila 0) resalta el dominante
         breakdown: [
-          { name: "EXATEC Blue Open", amount: 516800 },
           { name: "Borregos Flag Cup", amount: 186200 },
           { name: "EXATEC Wealth Strategy", amount: 90000 },
           { name: "Arte, Cultura y Conexión", amount: 70000 },
           { name: "Otros", amount: 27142 },
+        ],
+      },
+      {
+        id: "agr-lowlights",
+        type: "retos",
+        title: "Lowlights",
+        kicker: "Agrupaciones",
+        items: [
+          {
+            lead: "Curva de aprendizaje en nuevos proyectos",
+            body: "La implementación de nuevas iniciativas nos permitió identificar procesos institucionales clave, como contratación y pago de facilitadores, uso de marca y alta de proveedores.",
+          },
+          {
+            lead: "Alta complejidad operativa",
+            body: "La coordinación entre múltiples áreas y procesos evidenció la necesidad de fortalecer la planeación y estandarizar la operación.",
+          },
         ],
       },
     ],
@@ -433,29 +394,24 @@ export const GROUPS = [
         id: "ldg-portada",
         type: "cover",
         title: "Líderes de Generación",
-        kicker: "Rediseño de Experiencia · Monterrey",
+        kicker: "Diseño de journey · Monterrey",
         logo: "/brand/logo-ldg-blanco.webp",
         logoAlt: "Líderes de Generación",
       },
-      // PUNTO 1 — popup doble (video vertical + texto → video horizontal)
+      // PUNTO 1 — sólo highlight (la línea con el nodo resaltado)
       journeyRoadmap(0),
-      journeyPopup("ldg-p1a", { point: JOURNEY_POINTS[0], pointN: 1, media: "video-vertical", text: true, src: "/media/campana_ldg.mp4" }),
-      journeyPopup("ldg-p1b", { media: "video-horizontal", src: "/media/ldg_pst.mp4" }),
-      // PUNTO 2 — sólo highlight (la línea con el nodo resaltado)
+      // PUNTO 2 — sólo highlight
       journeyRoadmap(1),
-      // PUNTO 3 — popup (video vertical + texto)
+      // PUNTO 3 — sólo highlight
       journeyRoadmap(2),
-      journeyPopup("ldg-p3", { point: JOURNEY_POINTS[2], pointN: 3, media: "video-vertical", text: true, src: "/media/sesion.mp4" }),
       // PUNTO 4 — sólo highlight
       journeyRoadmap(3),
       // PUNTO 5 — popup (video vertical + texto)
       journeyRoadmap(4),
       journeyPopup("ldg-p5", { point: JOURNEY_POINTS[4], pointN: 5, media: "video-vertical", text: true, src: "/media/ceremonia_ldg.mp4" }),
-      // PUNTO 6 — popup triple (video h → pst → video h)
+      // PUNTO 6 — popup (colaboración EXATEC/LDG en los eventos PST)
       journeyRoadmap(5),
-      journeyPopup("ldg-p6a", { media: "video-horizontal", src: "/media/PSTrecap.mp4" }),
       journeyPopup("ldg-p6b", { media: "pst", pst: JOURNEY_PST }),
-      journeyPopup("ldg-p6c", { media: "video-horizontal", src: "/media/videopau.mp4" }),
       // PUNTO 7 — popup (foto horizontal + texto)
       journeyRoadmap(6),
       journeyPopup("ldg-p7", {
@@ -476,6 +432,88 @@ export const GROUPS = [
           { time: "2:00", item: "Cierre" },
         ],
       }),
+      {
+        id: "ldg-lowlights",
+        type: "retos",
+        title: "Lowlights",
+        kicker: "Líderes de Generación",
+        items: [
+          {
+            lead: "Participación en el proceso de refrendo",
+            body: "El refrendo evidenció la necesidad de fortalecer la comunicación y el seguimiento para asegurar que más Líderes de Generación completen su compromiso.",
+          },
+          {
+            lead: "Vinculación con Directores de Carrera",
+            body: "Se identificó la oportunidad de involucrar más a los Directores de Carrera, brindándoles mayor claridad sobre su papel dentro del Journey de Líderes de Generación.",
+          },
+          {
+            lead: "Sinergia con LiFE",
+            body: "La coordinación con LiFE nos dio áreas de oportunidad en comunicación y planeación, impulsando la necesidad de fortalecer el trabajo conjunto.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "aprendizajes",
+    name: "Aprendizajes",
+    short: "APR",
+    hub: { angle: 90 },
+    slides: [
+      {
+        id: "apr-portada",
+        type: "cover",
+        title: "Aprendizajes",
+        kicker: "Por área · Monterrey",
+        logo: "/brand/logo-exatec-blanco.webp",
+        logoAlt: "EXATEC",
+      },
+      {
+        id: "apr-rac",
+        type: "aprendizajes",
+        title: "Regreso a Casa",
+        kicker: "Aprendizajes",
+        items: [
+          "Diversificar los canales de comunicación para fortalecer el alcance y la participación",
+          "Anticipar el cierre de registros y la solicitud de materiales",
+          "Estandarizar la identidad visual y los elementos de producción",
+          "Potenciar el componente de nostalgia",
+        ],
+      },
+      {
+        id: "apr-agrupaciones",
+        type: "aprendizajes",
+        title: "Agrupaciones EXATEC",
+        kicker: "Aprendizajes",
+        items: [
+          "Definir desde el inicio del ciclo una planeación, calendarización y reglas de operación.",
+          "Alinear los proyectos y eventos de las agrupaciones con las prioridades estratégicas del equipo.",
+          "Establecer reuniones periódicas con las presidencias",
+        ],
+      },
+      {
+        id: "apr-visitas",
+        type: "aprendizajes",
+        title: "Visitas EXATEC",
+        kicker: "Aprendizajes",
+        items: [
+          "Ampliar el número de personas capacitadas para dar tours para ofrecer una mejor experiencia.",
+          "Integrar puntos de contacto en cada espacio",
+          "Fortalecer la preparación logística",
+        ],
+      },
+      {
+        id: "apr-ldg",
+        type: "aprendizajes",
+        title: "Líderes de Generación",
+        kicker: "Aprendizajes",
+        items: [
+          "Fortalecer la colaboración con el equipo de LiFE",
+          "Generar una mayor vinculación con las direcciones académicas",
+          "Incorporar dentro del journey del candidato a graduar un evento insignia",
+        ],
+      },
+      // cierre de toda la presentación: se queda como última slide del recorrido
       {
         id: "cierre-equipo",
         type: "equipo",

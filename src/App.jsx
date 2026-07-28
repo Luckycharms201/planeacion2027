@@ -65,6 +65,7 @@ export default function App() {
               liveN={nav.liveN}
               total={nav.liveTotal}
               isFullscreen={nav.isFullscreen}
+              onSelectSlide={nav.goToLive}
             />
           </div>
         </main>
