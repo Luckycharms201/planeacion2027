@@ -586,14 +586,6 @@ export const GROUPS = [
     hub: { angle: -60 },
     slides: [
       {
-        id: "pry-portada",
-        type: "cover",
-        title: "Proyectos",
-        kicker: "Planeación 2027 · Monterrey",
-        logo: "/brand/logo-exatec-blanco.webp",
-        logoAlt: "EXATEC",
-      },
-      {
         id: "pry-formacion",
         type: "formacion",
         title: "Programas de Formación EXATEC",
@@ -612,7 +604,7 @@ export const GROUPS = [
             { name: "Legado e Impacto", edad: "45–60 años" },
           ],
           paso1: "Tema prioritario",
-          paso2: "2 conferencias con un especialista",
+          paso2: "1 conferencia con un especialista",
         },
       },
     ],
