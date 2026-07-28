@@ -127,6 +127,19 @@ button {
     box-shadow 0.3s ease,
     border-color 0.3s ease;
 }
+/* Extiende el área sensible 8 px en todas direcciones, hasta la mitad del
+   hueco de 16 px que separa los recuadros. Como las áreas de dos vecinos se
+   tocan sin traslaparse, al pasar de uno a otro el hover NUNCA se pierde: sin
+   esto, al cruzar el hueco la rejilla arrancaba el regreso al estado base y
+   cambiaba de destino a media transición, que es lo que se veía cortado.
+   Un ::after vacío y posicionado sí recibe hit-testing, y al no tener fondo
+   no altera nada del diseño. */
+.ind-hoverable::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: inherit;
+}
 .ind-hoverable:hover {
   box-shadow: 0 0 52px -12px rgba(70, 229, 255, 0.6) !important;
   border-color: rgba(70, 229, 255, 0.45) !important;
@@ -145,11 +158,14 @@ button {
    Si se agregan indicadores o títulos más largos, hay que volver a medir. */
 .ind-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  /* expandidas a propósito: Chrome no interpola entre la notación repeat() y
+     una lista explícita de tracks, y con `repeat(4, 1fr)` el regreso al estado
+     base saltaba de golpe en vez de animarse */
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   transition:
-    grid-template-columns 0.34s cubic-bezier(0.2, 0.8, 0.2, 1),
-    grid-template-rows 0.34s cubic-bezier(0.2, 0.8, 0.2, 1);
+    grid-template-columns 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    grid-template-rows 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .ind-grid:has(> :nth-child(4n + 1):hover) {
   grid-template-columns: 1.5fr 0.8333fr 0.8333fr 0.8333fr;
@@ -175,7 +191,7 @@ button {
 .ind-totals > .ind-hoverable {
   flex: 0 0 330px;
   transition:
-    flex-basis 0.34s cubic-bezier(0.2, 0.8, 0.2, 1),
+    flex-basis 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 0.3s ease,
     border-color 0.3s ease;
 }
