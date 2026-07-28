@@ -92,7 +92,7 @@ export const GROUPS = [
         id: "rac-portada",
         type: "cover",
         title: "Regreso a Casa",
-        kicker: "Mejores Prácticas · Monterrey",
+        kicker: "Rediseño de Experiencia · Monterrey",
       },
       {
         id: "rac-video-viejitos",
