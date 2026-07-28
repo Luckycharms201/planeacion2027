@@ -524,6 +524,40 @@ export const GROUPS = [
     ],
   },
   {
+    id: "prioridades",
+    name: "Prioridades",
+    short: "PRI",
+    hub: { angle: -150 },
+    slides: [
+      {
+        id: "pri-vinculaciones",
+        type: "prioridades",
+        title: "Prioridades e Iniciativas del Área",
+        subtitle: "Crear vinculaciones con propósito",
+        pillars: [
+          {
+            lead: "Agregar herramientas y vivencias en los Regresos a Casa basados en los intereses y etapas de vida del EXATEC.",
+            // mapa aniversario → enfoque
+            map: [
+              { tag: "RAC 5, 10 y 15", focus: "Formación continua, beneficios y servicios EXATEC" },
+              { tag: "RAC 20", focus: "Networking con sentido" },
+              { tag: "RAC 25, 30 y 35", focus: "Docencia, Inversión Educativa, Proyectos de Innovación e Impacto" },
+              { tag: "RAC 40 y más", focus: "Generosidad (Becas y Donativos), Docencia" },
+            ],
+          },
+          {
+            lead: "Alinear agrupaciones y líderes de generación con los objetivos del departamento EXATEC.",
+            items: ["Eventos de Networking", "Generosidad / EXATEC Donando", "Voluntariado"],
+          },
+          {
+            lead: "Detectar a los EXATEC en las diferentes audiencias del Tec Campus MTY para fortalecer la vinculación con la institución.",
+            items: ["Mamás y Papás", "Profesores y Colaboradores", "Socios Formadores", "Donantes"],
+          },
+        ],
+      },
+    ],
+  },
+  {
     id: "calendario",
     name: "Calendario",
     short: "CAL",
