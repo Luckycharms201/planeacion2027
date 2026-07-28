@@ -586,6 +586,31 @@ export const GROUPS = [
     hub: { angle: -60 },
     slides: [
       {
+        id: "pry-estrategia",
+        type: "estrategia",
+        title: "Estrategia de Formación EXATEC",
+        kicker: "Proyectos",
+        blocks: [
+          {
+            title: "Formación Segmentada",
+            items: [
+              "Contenido diferenciado por etapa de vida.",
+              "Ciclos virtuales de dos sesiones por temática.",
+              "Especialistas por segmento.",
+            ],
+          },
+          {
+            title: "Talleres Presenciales con Causa",
+            items: [
+              "Talleres especializados en formato presencial.",
+              "Cuota de recuperación destinada a una causa o iniciativa de impacto.",
+              "Desarrollo en colaboración con Agrupaciones EXATEC y Educación Continua.",
+              "Oferta enfocada en habilidades y temas de alto interés para la comunidad.",
+            ],
+          },
+        ],
+      },
+      {
         id: "pry-formacion",
         type: "formacion",
         title: "Programas de Formación EXATEC",
