@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { useSlideTimeline } from "../../hooks/useSlideTimeline";
 import SlideHeading from "../ui/SlideHeading";
 import CountUp from "../dataviz/CountUp";
@@ -19,9 +18,8 @@ import CountUp from "../dataviz/CountUp";
  *
  * El acento cyan queda reservado al TOTAL, que es el dato principal.
  *
- * En vivo la slide se conduce con el teclado: ↓ enciende el primer indicador
- * y apaga los demás, ↓/↑ recorren la lista y Esc devuelve todo. Así deja de
- * ser una tabla de ocho cifras iguales y se vuelve una narración.
+ * Al señalar un recuadro, los demás se van a segundo plano: así la slide deja
+ * de leerse como ocho cifras del mismo peso y se puede comentar una por una.
  */
 
 const POS = "#7fe3b0";
@@ -139,16 +137,14 @@ function MiniBars({ prev, curr, meta, prevLabel, currLabel }) {
 }
 
 /** Tarjeta de un indicador. */
-function IndicadorCard({ row, prevLabel, currLabel, delay, focus }) {
+function IndicadorCard({ row, prevLabel, currLabel, delay }) {
   const change = row.curr / row.prev - 1;
   const up = change >= 0;
   const vsMeta = row.meta ? row.curr / row.meta : null;
 
   return (
     <div
-      className={`ind-card ind-hoverable flex flex-col justify-between rounded-2xl${
-        focus ? " is-focus" : ""
-      }`}
+      className="ind-card ind-hoverable flex flex-col justify-between rounded-2xl"
       style={{
         padding: 20,
         background:
@@ -349,8 +345,10 @@ export default function SlideIndicadores({ slide }) {
         { opacity: 0, y: 24, filter: "blur(10px)", duration: 0.7 },
         "-=0.2"
       )
-      // clearProps deja el DOM sin transform al terminar la entrada; el
-      // realce de hover lo maneja el CSS (ver .ind-hoverable en index.css).
+      // clearProps deja el DOM limpio al terminar la entrada; el realce de
+      // hover lo maneja el CSS (ver .ind-hoverable en index.css). Va también
+      // `opacity`: si GSAP la dejara inline, ese valor le ganaría a la regla
+      // que apaga los recuadros no señalados.
       .from(
         ".ind-hero",
         {
@@ -358,7 +356,7 @@ export default function SlideIndicadores({ slide }) {
           x: 30,
           duration: 0.7,
           stagger: 0.1,
-          clearProps: "transform",
+          clearProps: "transform,opacity",
         },
         "-=0.4"
       )
@@ -375,7 +373,7 @@ export default function SlideIndicadores({ slide }) {
           duration: 0.55,
           stagger: 0.07,
           ease: "power3.out",
-          clearProps: "transform",
+          clearProps: "transform,opacity",
         },
         "-=0.75"
       )
@@ -386,63 +384,8 @@ export default function SlideIndicadores({ slide }) {
       );
   });
 
-  const [focus, setFocus] = useState(null);
-  // espejo del estado: hay que decidir si se frena el evento en el mismo
-  // tick, y setState no se ve reflejado hasta el siguiente render
-  const focusRef = useRef(null);
-  const n = rows.length;
-
-  useEffect(() => {
-    const mover = (destino) => {
-      focusRef.current = destino;
-      setFocus(destino);
-    };
-
-    const onKey = (e) => {
-      // Al cambiar de slide, esta sigue montada ~0.6 s mientras se desvanece.
-      // Sin esto, su listener seguiría tragándose las flechas del presentador
-      // cuando la slide ya no está en pantalla.
-      if (scope.current?.closest(".xslide-out, .xcut-out")) return;
-
-      if (e.key === "Escape") {
-        // Escape no navega en modo live, así que no hace falta frenarlo
-        if (focusRef.current !== null) mover(null);
-        return;
-      }
-      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
-
-      const actual = focusRef.current;
-      const paso = e.key === "ArrowDown" ? 1 : -1;
-
-      // `↑` sin recorrido activo no lo abre por el final: sería un salto
-      // desconcertante. Se deja pasar y navega a la slide anterior.
-      if (actual === null && paso === -1) return;
-
-      const destino = actual === null ? 0 : actual + paso;
-      if (destino < 0 || destino >= n) {
-        mover(null);
-        return; // sin frenar: la misma tecla cambia de slide
-      }
-
-      e.preventDefault();
-      // stopImmediate y no stopPropagation: si el evento llegara a tener a
-      // `window` como destino, captura y burbujeo corren en orden de registro
-      // sobre el mismo nodo y el global —registrado antes— se colaría igual
-      e.stopImmediatePropagation();
-      mover(destino);
-    };
-
-    window.addEventListener("keydown", onKey, true);
-    return () => window.removeEventListener("keydown", onKey, true);
-  }, [n, scope]);
-
   return (
-    <div
-      ref={scope}
-      className={`flex h-full w-full flex-col gap-4 py-1${
-        focus !== null ? " ind-focusing" : ""
-      }`}
-    >
+    <div ref={scope} className="ind-slide flex h-full w-full flex-col gap-4 py-1">
       {/* encabezado + totales, en la misma banda para ganar altura abajo */}
       <div className="flex items-center justify-between gap-8">
         <SlideHeading kicker={slide.kicker} title={slide.title} />
@@ -486,7 +429,6 @@ export default function SlideIndicadores({ slide }) {
             prevLabel={slide.prevLabel}
             currLabel={slide.currLabel}
             delay={0.35 + i * 0.07}
-            focus={focus === i}
           />
         ))}
       </div>

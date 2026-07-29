@@ -319,33 +319,20 @@ h3,
   inset: -8px;
   border-radius: inherit;
 }
-/* `.is-focus` es el mismo realce, pero puesto por teclado desde
-   SlideIndicadores: el recorrido en vivo reusa el lenguaje visual del hover
-   en vez de inventar uno nuevo. */
-.ind-hoverable:hover,
-.ind-hoverable.is-focus {
+.ind-hoverable:hover {
   box-shadow: 0 0 52px -12px rgba(70, 229, 255, 0.6) !important;
   border-color: rgba(70, 229, 255, 0.45) !important;
   z-index: 3;
 }
 
-/* Lo que el hover no hacía y es el punto del recorrido: con un indicador
-   encendido, los otros siete se van a segundo plano. Sin esto la slide sigue
-   leyéndose como ocho cifras del mismo peso. */
-.ind-grid:has(> .is-focus) > :not(.is-focus) {
-  opacity: 0.28;
-  filter: saturate(0.45);
-}
-/* los totales acompañan, pero se quedan legibles: son el contexto contra el
-   que se comenta cada indicador */
-.ind-totals {
-  transition:
-    opacity 0.3s ease,
-    filter 0.3s ease;
-}
-.ind-focusing .ind-totals {
-  opacity: 0.5;
-  filter: saturate(0.7);
+/* Al señalar un recuadro, TODOS los demás de la slide —tarjetas y totales—
+   se van a segundo plano. Es una sola regla para los dos bloques: así da
+   igual si lo señalado es un indicador o un total, el resto cede.
+   Es lo que hace que la slide se pueda comentar cifra por cifra en vez de
+   leerse como ocho datos del mismo peso. */
+.ind-slide:has(.ind-hoverable:hover) .ind-hoverable:not(:hover) {
+  opacity: 0.32;
+  filter: saturate(0.5);
 }
 
 /* El recuadro señalado crece cambiando el LAYOUT, no con `transform: scale`:
@@ -369,28 +356,22 @@ h3,
     grid-template-columns 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
     grid-template-rows 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.ind-grid:has(> :nth-child(4n + 1):hover),
-.ind-grid:has(> :nth-child(4n + 1).is-focus) {
+.ind-grid:has(> :nth-child(4n + 1):hover) {
   grid-template-columns: 1.5fr 0.8333fr 0.8333fr 0.8333fr;
 }
-.ind-grid:has(> :nth-child(4n + 2):hover),
-.ind-grid:has(> :nth-child(4n + 2).is-focus) {
+.ind-grid:has(> :nth-child(4n + 2):hover) {
   grid-template-columns: 0.8333fr 1.5fr 0.8333fr 0.8333fr;
 }
-.ind-grid:has(> :nth-child(4n + 3):hover),
-.ind-grid:has(> :nth-child(4n + 3).is-focus) {
+.ind-grid:has(> :nth-child(4n + 3):hover) {
   grid-template-columns: 0.8333fr 0.8333fr 1.5fr 0.8333fr;
 }
-.ind-grid:has(> :nth-child(4n + 4):hover),
-.ind-grid:has(> :nth-child(4n + 4).is-focus) {
+.ind-grid:has(> :nth-child(4n + 4):hover) {
   grid-template-columns: 0.8333fr 0.8333fr 0.8333fr 1.5fr;
 }
-.ind-grid:has(> :nth-child(-n + 4):hover),
-.ind-grid:has(> :nth-child(-n + 4).is-focus) {
+.ind-grid:has(> :nth-child(-n + 4):hover) {
   grid-template-rows: 1.1fr 0.9fr;
 }
-.ind-grid:has(> :nth-child(n + 5):hover),
-.ind-grid:has(> :nth-child(n + 5).is-focus) {
+.ind-grid:has(> :nth-child(n + 5):hover) {
   grid-template-rows: 0.9fr 1.1fr;
 }
 
