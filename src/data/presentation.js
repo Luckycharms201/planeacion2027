@@ -600,6 +600,33 @@ export const GROUPS = [
         },
       },
       {
+        id: "pry-orgullo",
+        type: "orgullo",
+        title: "Estrategia de Orgullo y Pertenencia",
+        kicker: "Proyectos",
+        objetivo:
+          "Fortalecer el sentido de orgullo y pertenencia de la comunidad EXATEC mediante una oferta de beneficios y experiencias relevantes para los egresados del Campus Monterrey.",
+        prioridad:
+          "Complementar la oferta nacional de beneficios EXATEC con alianzas y experiencias locales que incrementen el valor percibido de la credencial EXATEC.",
+        iniciativas: [
+          {
+            title: "Fortalecer la propuesta de beneficios en Campus Monterrey",
+            items: [
+              "Identificar establecimientos y marcas de interés para los EXATEC de Monterrey.",
+              "Gestionar alianzas locales complementarias a la oferta nacional.",
+              "Incentivar el uso de la credencial EXATEC como acceso a beneficios exclusivos.",
+            ],
+          },
+          {
+            title: "Crear experiencias exclusivas para EXATEC con credencial",
+            items: [
+              "Diseñar eventos y activaciones con acceso mediante la credencial EXATEC.",
+              "Reforzar el sentido de pertenencia a través de experiencias exclusivas para la comunidad.",
+            ],
+          },
+        ],
+      },
+      {
         id: "pry-dia-exatec",
         type: "diaExatec",
         title: "Día EXATEC",

@@ -15,6 +15,7 @@ import SlideCalendario from "./SlideCalendario";
 import SlidePrioridades from "./SlidePrioridades";
 import SlideJerseys from "./SlideJerseys";
 import SlideFormacion from "./SlideFormacion";
+import SlideOrgullo from "./SlideOrgullo";
 import SlideDiaExatec from "./SlideDiaExatec";
 import SlideActividades from "./SlideActividades";
 import SlideAgrupacionesList from "./SlideAgrupacionesList";
@@ -47,6 +48,7 @@ export const SLIDE_COMPONENTS = {
   prioridades: SlidePrioridades,
   jerseys: SlideJerseys,
   formacion: SlideFormacion,
+  orgullo: SlideOrgullo,
   diaExatec: SlideDiaExatec,
   actividades: SlideActividades,
   agrupacionesList: SlideAgrupacionesList,
