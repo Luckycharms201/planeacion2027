@@ -608,6 +608,11 @@ export const GROUPS = [
           "Fortalecer el sentido de orgullo y pertenencia de la comunidad EXATEC mediante una oferta de beneficios y experiencias relevantes para los egresados del Campus Monterrey.",
         prioridad:
           "Complementar la oferta nacional de beneficios EXATEC con alianzas y experiencias locales que incrementen el valor percibido de la credencial EXATEC.",
+        // apertura de la slide: la credencial gira mostrando sus dos caras
+        credencial: {
+          front: "/media/credencial-frente.webp",
+          back: "/media/credencial-reverso.webp",
+        },
         iniciativas: [
           {
             title: "Fortalecer la propuesta de beneficios en Campus Monterrey",

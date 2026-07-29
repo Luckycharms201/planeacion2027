@@ -119,6 +119,65 @@ h3,
 }
 .gafete-back { transform: rotateY(180deg); }
 
+/* Credencial 3D — intro de la slide de Orgullo y Pertenencia.
+   La inclinación (.cred-tilt) y el giro (.cred-card) van en elementos
+   distintos a propósito: GSAP escribe `rotation` y `rotationY` sobre un
+   mismo elemento en un orden fijo, y aquí hace falta que el giro ocurra
+   DENTRO del marco ya inclinado, como en el dummy. */
+.cred-tilt,
+.cred-card {
+  transform-style: preserve-3d;
+}
+.cred-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  /* ~4% del ancho: el radio real de la tarjeta, ya recortado en el .webp */
+  border-radius: 26px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* el blur(0px) va declarado a propósito: la timeline lo sube en la salida
+     y GSAP solo interpola dos filtros con la misma lista de funciones */
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.55)) blur(0px);
+}
+.cred-face-back { transform: rotateY(180deg); }
+
+/* Barrido especular sobre el frente: la credencial es metálica y sin este
+   destello se lee como una imagen plana pegada. */
+.cred-sheen {
+  position: absolute;
+  inset: -25%;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 62%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* Glow detrás de la tarjeta, en dos capas: un núcleo cyan (el acento de la
+   paleta) apenas más grande que la tarjeta, que asoma como halo por los
+   cuatro lados, y un lavado azul ancho que lo funde con el fondo. */
+.cred-glow {
+  border-radius: 999px;
+  background:
+    radial-gradient(
+      42% 34% at 50% 50%,
+      rgba(70, 229, 255, 0.55),
+      rgba(70, 229, 255, 0.2) 55%,
+      transparent 76%
+    ),
+    radial-gradient(
+      closest-side,
+      rgba(45, 107, 224, 0.45),
+      rgba(21, 52, 138, 0.22) 50%,
+      transparent 80%
+    );
+  filter: blur(34px);
+}
+
 /* Recuadros de la slide de Indicadores. Al pasar el mouse crecen un poco y
    ganan el halo cyan del panel de total, para enfatizar el que se señala
    durante la presentación.

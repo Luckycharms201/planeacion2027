@@ -1,5 +1,10 @@
 import { useSlideTimeline } from "../../hooks/useSlideTimeline";
 import SlideHeading from "../ui/SlideHeading";
+import CredencialIntro from "../ui/CredencialIntro";
+import {
+  buildCredencialIntro,
+  CRED_CONTENT_AT,
+} from "../ui/credencialIntroTimeline";
 
 /**
  * Slide · Estrategia de Orgullo y Pertenencia.
@@ -8,12 +13,21 @@ import SlideHeading from "../ui/SlideHeading";
  * Prioridad → Iniciativas), pero aquí el objetivo es uno solo: a la
  * izquierda el planteamiento en bloques etiquetados, a la derecha las
  * iniciativas como tarjetas con su desglose.
+ *
+ * Al entrar, la credencial EXATEC —el objeto del que habla toda la slide—
+ * hace la apertura girando en 3D antes de descubrir el contenido.
  */
 export default function SlideOrgullo({ slide }) {
   const iniciativas = slide.iniciativas ?? [];
+  const credencial = slide.credencial;
 
   const scope = useSlideTimeline((tl) => {
-    tl.from(".sh-kicker", { opacity: 0, y: 12, duration: 0.5 })
+    if (credencial) buildCredencialIntro(tl);
+    // sin credencial el contenido entra de inmediato; con ella, justo cuando
+    // la tarjeta rebasa la cámara
+    const at = credencial ? CRED_CONTENT_AT : 0;
+
+    tl.from(".sh-kicker", { opacity: 0, y: 12, duration: 0.5 }, at)
       .from(".sh-title", { opacity: 0, y: 24, filter: "blur(10px)", duration: 0.7 }, "-=0.2")
       .from(".org-bloque", { opacity: 0, y: 20, duration: 0.55, stagger: 0.14 }, "-=0.3")
       .from(
@@ -25,7 +39,11 @@ export default function SlideOrgullo({ slide }) {
   });
 
   return (
-    <div ref={scope} className="flex h-full w-full flex-col gap-5 py-2">
+    <div ref={scope} className="relative flex h-full w-full flex-col gap-5 py-2">
+      {credencial && (
+        <CredencialIntro front={credencial.front} back={credencial.back} />
+      )}
+
       <SlideHeading kicker={slide.kicker} title={slide.title} />
 
       <div className="grid min-h-0 flex-1 grid-cols-[0.85fr_1.15fr] content-center items-center gap-10">

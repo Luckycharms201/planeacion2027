@@ -23,9 +23,14 @@ dist-ssr
 *.sln
 *.sw?
 
-# bocetos de referencia (no parte de la app)
+# material fuente en la raíz (no parte de la app): bocetos, capturas y los
+# originales pesados de los que salen los assets optimizados de public/media
 ref.png
 pst.png
+credencial.png
+jersey.MOV
+animacion dummy.mp4
+Screenshot*.png
 
 # worktrees de sesiones de Claude Code (repos anidados, no van al historial)
 .claude/worktrees/
