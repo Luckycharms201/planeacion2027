@@ -91,15 +91,46 @@ h3,
 .jp-pop { animation: jp-pop 0.42s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .jp-fade { animation: jp-fade 0.4s ease-out; }
 
-/* Crossfade entre slides: la capa saliente se desvanece mientras la entrante
-   aparece con su propia animación. */
-@keyframes xfade-out {
+/* Transición entre slides.
+   Al crossfade se le suma un desplazamiento corto en la dirección de la
+   flecha: da continuidad espacial al recorrido —se siente avanzar por un
+   carrete— en vez de un parpadeo en el mismo sitio. `--xdir` la fija
+   LiveStage: 1 al avanzar, -1 al retroceder. */
+@keyframes xslide-out {
+  from { opacity: 1; transform: translate3d(0, 0, 0); }
+  to { opacity: 0; transform: translate3d(calc(var(--xdir, 1) * -32px), 0, 0); }
+}
+@keyframes xslide-in {
+  from { opacity: 0; transform: translate3d(calc(var(--xdir, 1) * 32px), 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.xslide-out {
+  animation: xslide-out 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
+}
+.xslide-in {
+  animation: xslide-in 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Entrada a una portada de grupo: corte a negro. La saliente se va rápido y
+   la entrante espera; en el hueco solo queda el fondo, y ese respiro es lo
+   que hace leer "cambio de capítulo" sin anunciarlo. El offset del hueco
+   está replicado en SlideCover (CUT_GAP) para que su entrada no arranque a
+   ciegas. */
+@keyframes xcut-out {
   from { opacity: 1; }
   to { opacity: 0; }
 }
-.xfade-out {
-  animation: xfade-out 0.45s ease forwards;
+@keyframes xcut-in {
+  0%, 40% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.xcut-out {
+  animation: xcut-out 0.16s ease-in forwards;
   pointer-events: none;
+}
+.xcut-in {
+  animation: xcut-in 0.62s ease-out;
 }
 
 /* Gafetes 3D — flip continuo frente↔reverso. Estado base (sin animación)
