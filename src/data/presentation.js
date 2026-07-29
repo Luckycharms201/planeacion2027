@@ -607,6 +607,38 @@ export const GROUPS = [
           paso2: "1 conferencia con un especialista",
         },
       },
+      {
+        id: "pry-dia-exatec",
+        type: "diaExatec",
+        title: "Día EXATEC",
+        kicker: "Proyectos",
+        intro:
+          "El Día EXATEC es un evento que busca fortalecer el sentido de pertenencia de la comunidad EXATEC a través de una jornada de experiencias diseñadas para reencontrarse, reconectar y celebrar el orgullo de ser parte del Tecnológico de Monterrey. Al ser un evento sin costo y abierto a toda la comunidad, busca acercar a más egresados al campus, generar nuevas oportunidades de convivencia y fomentar una participación activa en futuras iniciativas EXATEC.",
+        pilares: [
+          { verbo: "Recordar", claves: ["Nostalgia", "campus", "historia"] },
+          { verbo: "Reconectar", claves: ["Generación", "amigos", "profesores"] },
+          { verbo: "Crecer", claves: ["Conferencias", "networking", "emprendimiento"] },
+          { verbo: "Celebrar", claves: ["Música", "comida", "actividades", "familia"] },
+        ],
+      },
+      {
+        id: "pry-dia-actividades",
+        type: "actividades",
+        title: "Actividades",
+        kicker: "Día EXATEC",
+        items: [
+          "Salones abiertos para volver a las aulas.",
+          "Muro de recuerdos con fotografías históricas.",
+          "Línea del tiempo: \"Así era el Tec cuando estudiabas\".",
+          "TED Talks de egresados destacados.",
+          "Feria de emprendimientos EXATEC.",
+          "Espacio para asociaciones y voluntariados.",
+          "Stands informativos de CVDP, Beneficios EXATEC, credencial EXATEC y otros servicios.",
+          "Música en vivo con talento EXATEC.",
+          { text: "Food trucks y experiencias gastronómicas.", note: "Emprendimientos EXATEC" },
+          "Photo opportunities.",
+        ],
+      },
     ],
   },
   {
