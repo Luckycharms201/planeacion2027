@@ -28,7 +28,7 @@ export default function SlideOrgullo({ slide }) {
     <div ref={scope} className="flex h-full w-full flex-col gap-5 py-2">
       <SlideHeading kicker={slide.kicker} title={slide.title} />
 
-      <div className="grid min-h-0 flex-1 grid-cols-[0.85fr_1.15fr] content-center items-start gap-10">
+      <div className="grid min-h-0 flex-1 grid-cols-[0.85fr_1.15fr] content-center items-center gap-10">
         {/* planteamiento */}
         <div className="flex flex-col gap-5">
           <div className="org-bloque">
