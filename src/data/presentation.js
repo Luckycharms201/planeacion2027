@@ -768,12 +768,12 @@ export const INDICADORES = {
     { name: "Registrados LDG", prev: 238, curr: 294, meta: 265 },
     { name: "LDG", prev: 466, curr: 444, meta: 530 },
     { name: "Registrados RAC", prev: 2088, curr: 1717, meta: 2550 },
-    { name: "Networking", prev: 2720, curr: 3381, meta: 3340 },
+    { name: "Networking", prev: 2720, curr: 3768, meta: 3340 },
     { name: "Vinculados Estratégicamente", prev: 464, curr: 690, meta: 714 },
     { name: "EXATEC Donando", prev: 1452, curr: 1483, meta: 1460 },
     { name: "NPS", prev: 56, curr: 65, meta: null },
   ],
-  total: { name: "Total", prev: 7708, curr: 8454, meta: 9389 },
+  total: { name: "Total", prev: 7708, curr: 8841, meta: 9389 },
   /**
    * Segundo total, calculado restando del anterior las filas listadas en
    * `exclude` (por `name`). Se deriva en el componente, no se escribe a mano,
