@@ -58,7 +58,8 @@ export default function App() {
     <NavContext.Provider value={nav}>
       <FitStage>
         <main className="bg-bg-deep absolute inset-0 overflow-hidden">
-          <AmbientBackground />
+          {/* el fondo toma el tono del grupo en el que va la presentación */}
+          <AmbientBackground groupId={liveSlide?.groupId} />
           <div className="absolute inset-0">
             <LiveStage
               slide={liveSlide}
