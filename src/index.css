@@ -176,6 +176,46 @@ h3,
   }
 }
 
+/* Ken Burns — zoom y paneo lentísimos sobre las fotos.
+   La escala nunca baja de 1.05 y el paneo nunca pasa de 1.6%: con
+   `object-cover` el margen que deja la escala es (s-1)/2 por lado, así que
+   ese techo garantiza que jamás asome el borde de la imagen.
+   Cuatro recorridos: dos que acercan, dos que alejan, con paneos opuestos.
+   La fase la asigna kenBurns.js foto por foto. */
+@keyframes kb-0 {
+  from { transform: scale(1.05) translate3d(0, 0, 0); }
+  to { transform: scale(1.11) translate3d(-1.4%, -1%, 0); }
+}
+@keyframes kb-1 {
+  from { transform: scale(1.11) translate3d(1.2%, 0.8%, 0); }
+  to { transform: scale(1.05) translate3d(0, 0, 0); }
+}
+@keyframes kb-2 {
+  from { transform: scale(1.06) translate3d(1%, -0.8%, 0); }
+  to { transform: scale(1.12) translate3d(-0.9%, 1.2%, 0); }
+}
+@keyframes kb-3 {
+  from { transform: scale(1.12) translate3d(-1%, 0.9%, 0); }
+  to { transform: scale(1.06) translate3d(1.3%, -0.9%, 0); }
+}
+.kb {
+  animation-duration: 24s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform;
+}
+/* el `animation-delay` lo pone kenBurns.js por foto: es lo que evita que dos
+   vecinas que compartan recorrido se muevan en espejo */
+.kb-0 { animation-name: kb-0; }
+.kb-1 { animation-name: kb-1; }
+.kb-2 { animation-name: kb-2; }
+.kb-3 { animation-name: kb-3; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kb { animation: none; }
+}
+
 /* Gafetes 3D — flip continuo frente↔reverso. Estado base (sin animación)
    muestra el frente, así que nada se rompe si la animación no corre. */
 @keyframes gafete-flip {

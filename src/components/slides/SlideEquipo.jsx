@@ -1,4 +1,5 @@
 import { useSlideTimeline } from "../../hooks/useSlideTimeline";
+import { kenBurns } from "../ui/kenBurns";
 
 /**
  * Slide de cierre · Equipo. Título grande con el logo EXATEC inline en lugar de
@@ -6,6 +7,8 @@ import { useSlideTimeline } from "../../hooks/useSlideTimeline";
  * regla + foto con stagger.
  */
 export default function SlideEquipo({ slide }) {
+  const ken = kenBurns(slide.photo);
+
   const scope = useSlideTimeline((tl) => {
     tl.from(".eq-title", { opacity: 0, y: 20, filter: "blur(10px)", duration: 0.8 })
       .from(
@@ -40,8 +43,8 @@ export default function SlideEquipo({ slide }) {
         <img
           src={slide.photo}
           alt={slide.photoAlt ?? slide.title}
-          style={{ height: 500, width: "auto" }}
-          className="block"
+          style={{ height: 500, width: "auto", ...ken.style }}
+          className={`block ${ken.className}`}
         />
       </div>
     </div>

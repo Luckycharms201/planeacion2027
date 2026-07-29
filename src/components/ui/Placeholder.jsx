@@ -7,6 +7,7 @@
  * componente muestra la foto a tamaño completo en lugar del marcador.
  */
 import { useEffect, useRef } from "react";
+import { kenBurns } from "./kenBurns";
 
 export default function Placeholder({
   n,
@@ -18,6 +19,7 @@ export default function Placeholder({
   fullscreen = false,
 }) {
   const isVideo = kind === "video";
+  const ken = kenBurns(isVideo ? null : src);
 
   // arranca el video automáticamente al entrar a la slide (se remonta por
   // slide, así que reinicia cada vez). En la presentación ya hubo gesto del
@@ -80,7 +82,11 @@ export default function Placeholder({
           <img
             src={src}
             alt={alt ?? note ?? ""}
-            className="h-full w-full object-cover"
+            /* el Ken Burns vive en la imagen, no en el contenedor: quien la
+               usa le pasa el layout por `className` y el contenedor ya
+               recorta lo que se sale */
+            className={`h-full w-full object-cover ${ken.className}`}
+            style={ken.style}
           />
         )}
       </div>
