@@ -534,10 +534,10 @@ export const GROUPS = [
     ],
   },
   {
-    id: "prioridades",
-    name: "Prioridades",
-    short: "PRI",
-    hub: { angle: -150 },
+    id: "proyectos",
+    name: "Proyectos",
+    short: "PRY",
+    hub: { angle: -60 },
     slides: [
       {
         id: "pri-vinculaciones",
@@ -577,14 +577,6 @@ export const GROUPS = [
           },
         ],
       },
-    ],
-  },
-  {
-    id: "proyectos",
-    name: "Proyectos",
-    short: "PRY",
-    hub: { angle: -60 },
-    slides: [
       {
         id: "pry-formacion",
         type: "formacion",
