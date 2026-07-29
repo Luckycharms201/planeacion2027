@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { useSlideTimeline } from "../../hooks/useSlideTimeline";
 import SlideHeading from "../ui/SlideHeading";
 import CountUp from "../dataviz/CountUp";
@@ -17,6 +18,10 @@ import CountUp from "../dataviz/CountUp";
  * porque los indicadores van de 65 a 3,381 y una escala común los aplanaría.
  *
  * El acento cyan queda reservado al TOTAL, que es el dato principal.
+ *
+ * En vivo la slide se conduce con el teclado: ↓ enciende el primer indicador
+ * y apaga los demás, ↓/↑ recorren la lista y Esc devuelve todo. Así deja de
+ * ser una tabla de ocho cifras iguales y se vuelve una narración.
  */
 
 const POS = "#7fe3b0";
@@ -134,14 +139,16 @@ function MiniBars({ prev, curr, meta, prevLabel, currLabel }) {
 }
 
 /** Tarjeta de un indicador. */
-function IndicadorCard({ row, prevLabel, currLabel, delay }) {
+function IndicadorCard({ row, prevLabel, currLabel, delay, focus }) {
   const change = row.curr / row.prev - 1;
   const up = change >= 0;
   const vsMeta = row.meta ? row.curr / row.meta : null;
 
   return (
     <div
-      className="ind-card ind-hoverable flex flex-col justify-between rounded-2xl"
+      className={`ind-card ind-hoverable flex flex-col justify-between rounded-2xl${
+        focus ? " is-focus" : ""
+      }`}
       style={{
         padding: 20,
         background:
@@ -303,6 +310,20 @@ export default function SlideIndicadores({ slide }) {
   const total = slide.total;
 
   /**
+   * Recorrido en vivo: índice del indicador encendido, o null si están todos.
+   *
+   * `↓` arranca el recorrido y `↓`/`↑` lo avanzan; al pasarse de cualquiera de
+   * los dos extremos se apaga el realce y la tecla sigue su camino, así que
+   * esa misma pulsación cambia de slide. Nunca deja al presentador atrapado:
+   * `←`/`→`, espacio y las teclas de clicker (PageUp/PageDown) siguen
+   * navegando de inmediato porque aquí no se tocan.
+   *
+   * El listener va en fase de captura sobre `window` para correr ANTES del
+   * global de useNavigation, que escucha en burbujeo y tiene `↑`/`↓` como
+   * alias de anterior/siguiente.
+   */
+
+  /**
    * Total ajustado: el total del Excel menos las filas excluidas. Se resta
    * (en vez de sumar el resto) para que herede exactamente lo que ese total
    * contenga, sea lo que sea.
@@ -365,8 +386,63 @@ export default function SlideIndicadores({ slide }) {
       );
   });
 
+  const [focus, setFocus] = useState(null);
+  // espejo del estado: hay que decidir si se frena el evento en el mismo
+  // tick, y setState no se ve reflejado hasta el siguiente render
+  const focusRef = useRef(null);
+  const n = rows.length;
+
+  useEffect(() => {
+    const mover = (destino) => {
+      focusRef.current = destino;
+      setFocus(destino);
+    };
+
+    const onKey = (e) => {
+      // Al cambiar de slide, esta sigue montada ~0.6 s mientras se desvanece.
+      // Sin esto, su listener seguiría tragándose las flechas del presentador
+      // cuando la slide ya no está en pantalla.
+      if (scope.current?.closest(".xslide-out, .xcut-out")) return;
+
+      if (e.key === "Escape") {
+        // Escape no navega en modo live, así que no hace falta frenarlo
+        if (focusRef.current !== null) mover(null);
+        return;
+      }
+      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+
+      const actual = focusRef.current;
+      const paso = e.key === "ArrowDown" ? 1 : -1;
+
+      // `↑` sin recorrido activo no lo abre por el final: sería un salto
+      // desconcertante. Se deja pasar y navega a la slide anterior.
+      if (actual === null && paso === -1) return;
+
+      const destino = actual === null ? 0 : actual + paso;
+      if (destino < 0 || destino >= n) {
+        mover(null);
+        return; // sin frenar: la misma tecla cambia de slide
+      }
+
+      e.preventDefault();
+      // stopImmediate y no stopPropagation: si el evento llegara a tener a
+      // `window` como destino, captura y burbujeo corren en orden de registro
+      // sobre el mismo nodo y el global —registrado antes— se colaría igual
+      e.stopImmediatePropagation();
+      mover(destino);
+    };
+
+    window.addEventListener("keydown", onKey, true);
+    return () => window.removeEventListener("keydown", onKey, true);
+  }, [n, scope]);
+
   return (
-    <div ref={scope} className="flex h-full w-full flex-col gap-4 py-1">
+    <div
+      ref={scope}
+      className={`flex h-full w-full flex-col gap-4 py-1${
+        focus !== null ? " ind-focusing" : ""
+      }`}
+    >
       {/* encabezado + totales, en la misma banda para ganar altura abajo */}
       <div className="flex items-center justify-between gap-8">
         <SlideHeading kicker={slide.kicker} title={slide.title} />
@@ -410,6 +486,7 @@ export default function SlideIndicadores({ slide }) {
             prevLabel={slide.prevLabel}
             currLabel={slide.currLabel}
             delay={0.35 + i * 0.07}
+            focus={focus === i}
           />
         ))}
       </div>
