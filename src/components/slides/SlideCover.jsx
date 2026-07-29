@@ -1,3 +1,4 @@
+import { useId } from "react";
 import gsap from "gsap";
 import { useSlideTimeline } from "../../hooks/useSlideTimeline";
 import { META } from "../../data/presentation";
@@ -25,14 +26,19 @@ export default function SlideCover({ slide }) {
     Number.isInteger(slide.groupIndex) && slide.groupIndex >= 0
       ? String(slide.groupIndex + 1).padStart(2, "0")
       : null;
+  // id propio por instancia: durante la transición hay dos portadas montadas
+  // a la vez y un id fijo se duplicaría. `useId` trae `:`, ilegal dentro de
+  // un `url(#…)` sin comillas.
+  const outlineId = `cover-num-${useId().replace(/:/g, "")}`;
 
   const scope = useSlideTimeline((tl) => {
+    // sin `filter` en este tween: la clave del contorno es un `filter:
+    // url(…)` sobre el número, y GSAP lo pisaría al animar la propiedad
     tl.from(
       ".cover-num",
       {
         opacity: 0,
         scale: 1.2,
-        filter: "blur(12px)",
         duration: 1.5,
         ease: "power3.out",
       },
@@ -85,23 +91,70 @@ export default function SlideCover({ slide }) {
       className="relative isolate flex h-full w-full flex-col items-center justify-center gap-8 overflow-hidden text-center"
     >
       {chapter && (
-        /* Sangra por la esquina inferior izquierda y el marco lo recorta: a
-           tamaño completo y centrado competía con el título en vez de leerse
-           como marca de agua. El recorte es lo que lo vuelve editorial. */
-        <span
-          aria-hidden="true"
-          className="cover-num font-display pointer-events-none absolute -z-10 leading-none font-black select-none"
-          style={{
-            fontSize: "44rem",
-            left: "-11%",
-            bottom: "-26%",
-            transformOrigin: "left bottom",
-            color: "transparent",
-            WebkitTextStroke: "3px rgba(45, 107, 224, 0.22)",
-          }}
-        >
-          {chapter}
-        </span>
+        <>
+          {/* El contorno se deriva de la SILUETA rasterizada, no de los
+              trazos del glifo: se dilata el alfa y se le resta el original,
+              lo que deja un anillo de grosor uniforme por fuera.
+              `-webkit-text-stroke` no sirve aquí — los dígitos de Montserrat
+              Black se dibujan con subtrazos que se traslapan, y al calcarlos
+              aparecían líneas sueltas dentro del propio número. */}
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            width="0"
+            height="0"
+            className="absolute"
+          >
+            <defs>
+              <filter
+                id={outlineId}
+                x="-15%"
+                y="-15%"
+                width="130%"
+                height="130%"
+                colorInterpolationFilters="sRGB"
+              >
+                <feMorphology
+                  in="SourceAlpha"
+                  operator="dilate"
+                  radius="3"
+                  result="grueso"
+                />
+                <feComposite
+                  in="grueso"
+                  in2="SourceAlpha"
+                  operator="out"
+                  result="anillo"
+                />
+                <feFlood floodColor="#2d6be0" floodOpacity="0.55" result="tinta" />
+                <feComposite in="tinta" in2="anillo" operator="in" />
+              </filter>
+            </defs>
+          </svg>
+
+          {/* Sangra por la esquina inferior izquierda y el marco lo recorta: a
+              tamaño completo y centrado competía con el título en vez de
+              leerse como marca de agua. El recorte es lo que lo vuelve
+              editorial. */}
+          <span
+            aria-hidden="true"
+            className="cover-num font-display pointer-events-none absolute -z-10 leading-none font-black select-none"
+            style={{
+              fontSize: "44rem",
+              left: "-11%",
+              bottom: "-26%",
+              transformOrigin: "left bottom",
+              // opaco a propósito: el filtro solo usa SourceAlpha
+              color: "#2d6be0",
+              filter: `url(#${outlineId})`,
+              // capa propia, para que la deriva en loop no obligue a recalcular
+              // la morfología en cada frame
+              willChange: "transform",
+            }}
+          >
+            {chapter}
+          </span>
+        </>
       )}
 
       <span
