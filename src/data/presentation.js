@@ -600,6 +600,66 @@ export const GROUPS = [
         },
       },
       {
+        id: "pry-whatsapp",
+        type: "whatsapp",
+        title: "Canal Oficial EXATEC en WhatsApp",
+        kicker: "Proyectos",
+        subtitle:
+          "Comunicación directa, sin algoritmo y sin fricción con nuestra comunidad de egresados.",
+        reto: {
+          label: "El reto",
+          body: "El correo compite con bandejas saturadas y las redes sociales dependen del algoritmo. Nuestros anuncios de eventos e iniciativas no llegan de forma confiable a quien ya decidió seguirnos.",
+          // PENDIENTE: sustituir por la cifra real y borrar el `pendiente`
+          pendiente:
+            "Dato por confirmar: tasa de apertura promedio de los correos EXATEC vs. alcance orgánico en redes.",
+        },
+        propuesta: {
+          label: "La propuesta",
+          body: "Un canal de difusión unidireccional, administrado por el equipo EXATEC, para anunciar eventos, convocatorias, beneficios e iniciativas de la comunidad.",
+        },
+        // maqueta del canal: sirve para que se vea que solo publica el área
+        mock: {
+          nombre: "EXATEC Monterrey",
+          suscriptores: "Canal oficial · Solo lectura",
+          posts: [
+            {
+              text: "Regreso a Casa 25, 30 y 35 Aniversario · 25 y 26 de septiembre.",
+              cta: "Regístrate aquí →",
+            },
+            {
+              text: "Nueva alianza de beneficios: presenta tu credencial EXATEC.",
+            },
+            {
+              text: "Convocatoria abierta: Líderes de Generación 2027.",
+              cta: "Nomina a un EXATEC →",
+            },
+          ],
+          footer: "Solo los administradores pueden publicar.",
+        },
+        // Estas reglas son el argumento institucional del proyecto: acotan
+        // el alcance del canal antes de que lo pregunten.
+        reglas: {
+          label: "Reglas de operación",
+          note: "Alcance y gobernanza del canal",
+          items: [
+            {
+              lead: "Solo contenido EXATEC oficial",
+              body: "Eventos, convocatorias, beneficios y logros de egresados.",
+            },
+            {
+              lead: "Administradores designados",
+              body: "Tono y línea gráfica alineados a la marca Tec.",
+              // PENDIENTE: nombrar a los administradores del canal
+              pendiente: "Definir nombres de los administradores.",
+            },
+            {
+              lead: "Cada publicación lleva CTA",
+              body: "Con link rastreable al registro, para medir el aporte del canal.",
+            },
+          ],
+        },
+      },
+      {
         id: "pry-orgullo",
         type: "orgullo",
         title: "Estrategia de Orgullo y Pertenencia",
