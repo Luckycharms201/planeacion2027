@@ -609,9 +609,6 @@ export const GROUPS = [
         reto: {
           label: "El reto",
           body: "El correo compite con bandejas saturadas y las redes sociales dependen del algoritmo. Nuestros anuncios de eventos e iniciativas no llegan de forma confiable a quien ya decidió seguirnos.",
-          // PENDIENTE: sustituir por la cifra real y borrar el `pendiente`
-          pendiente:
-            "Dato por confirmar: tasa de apertura promedio de los correos EXATEC vs. alcance orgánico en redes.",
         },
         propuesta: {
           label: "La propuesta",
@@ -648,9 +645,7 @@ export const GROUPS = [
             },
             {
               lead: "Administradores designados",
-              body: "Tono y línea gráfica alineados a la marca Tec.",
-              // PENDIENTE: nombrar a los administradores del canal
-              pendiente: "Definir nombres de los administradores.",
+              body: "Karla, Chris, Anagaby y Mariana. Tono y línea gráfica alineados a la marca Tec.",
             },
             {
               lead: "Cada publicación lleva CTA",

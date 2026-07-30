@@ -11,24 +11,7 @@ import SlideHeading from "../ui/SlideHeading";
  *
  * La maqueta es CSS puro —no imagen— para que escale con el canvas y use
  * la paleta de la presentación.
- *
- * `pendiente` marca un dato aún por confirmar: se pinta como chip punteado
- * para que se note en el ensayo y no se cuele a la presentación final.
  */
-
-/** Chip punteado para datos/nombres todavía por confirmar. */
-function Pendiente({ children, className = "" }) {
-  return (
-    <span
-      className={`text-text-dim inline-flex items-center gap-1.5 rounded-md border border-dashed border-blue-500/70 bg-blue-900/40 px-2 py-0.5 text-[12px] leading-snug ${className}`}
-    >
-      <span className="text-accent text-[10px] font-bold tracking-widest">
-        ⌁
-      </span>
-      {children}
-    </span>
-  );
-}
 
 /** Maqueta del canal: cabecera + publicaciones + aviso de solo lectura. */
 function CanalMock({ mock }) {
@@ -134,9 +117,6 @@ export default function SlideWhatsApp({ slide }) {
             <p className="text-text mt-2 text-[15px] leading-relaxed">
               {slide.reto?.body}
             </p>
-            {slide.reto?.pendiente && (
-              <Pendiente className="mt-2.5">{slide.reto.pendiente}</Pendiente>
-            )}
           </div>
 
           {/* la propuesta */}
@@ -183,9 +163,6 @@ export default function SlideWhatsApp({ slide }) {
               <p className="text-text-dim mt-2 text-[13px] leading-snug">
                 {r.body}
               </p>
-              {r.pendiente && (
-                <Pendiente className="mt-2">{r.pendiente}</Pendiente>
-              )}
             </div>
           ))}
         </div>
