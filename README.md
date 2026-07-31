@@ -15,6 +15,19 @@ npm run dev      # http://localhost:5173
 - `npm run preview` — sirve el build localmente
 - `#lab` — laboratorio temporal de primitivas de dato (ej. `localhost:5173/#lab`)
 
+## Exportar a PDF
+
+```bash
+npm run export:pdf            # → export/Planeacion-2027.pdf (una página por slide)
+npm run export:pdf -- --png   # conserva además los PNG en export/slides-png/
+```
+
+Compila, abre cada slide en Chrome headless con `?n=<slide>&noanim` (las entradas
+GSAP saltan a su estado final), captura el canvas 1440×810 a 2× y arma un PDF 16:9
+sin pérdida. Usa el Chrome instalado; si está en otra ruta, pásala en `CHROME_PATH`.
+Los videos salen como fotograma fijo y las slides con pestañas (Calendario) en su
+estado por defecto.
+
 ## Navegación
 
 - **Hub:** `← →` mueven el foco entre grupos · `Enter` entra al grupo (zoom de cámara)
