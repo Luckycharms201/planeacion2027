@@ -25,8 +25,8 @@ npm run export:pdf -- --png   # conserva además los PNG en export/slides-png/
 Compila, abre cada slide en Chrome headless con `?n=<slide>&noanim` (las entradas
 GSAP saltan a su estado final), captura el canvas 1440×810 a 2× y arma un PDF 16:9
 sin pérdida. Usa el Chrome instalado; si está en otra ruta, pásala en `CHROME_PATH`.
-Los videos salen como fotograma fijo y las slides con pestañas (Calendario) en su
-estado por defecto.
+Son 45 páginas para 41 slides: el Calendario rinde una por mes (`?mes=<1-12>`,
+que también sirve como deep link de QA). Los videos salen como fotograma fijo.
 
 ## Navegación
 

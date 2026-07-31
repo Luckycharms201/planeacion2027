@@ -65,7 +65,12 @@ const MAX_CARRILES = 3;
 export default function SlideCalendario({ slide }) {
   const year = slide.year ?? new Date().getFullYear();
   const months = slide.months ?? [8, 9, 10, 11, 12];
-  const [selected, setSelected] = useState(months[0]);
+  // ?mes=<1-12> abre el calendario en ese mes (deep link de QA y de la
+  // exportación a PDF, que saca una página por mes)
+  const [selected, setSelected] = useState(() => {
+    const m = Number(new URLSearchParams(window.location.search).get("mes"));
+    return months.includes(m) ? m : months[0];
+  });
 
   const { porDia, estrellas, lista, semanas } = useMemo(() => {
     const desdeISO = (s) => {

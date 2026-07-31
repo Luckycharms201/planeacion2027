@@ -65,10 +65,29 @@ async function startServer() {
   return { url, stop: () => proc.kill() };
 }
 
-/** Nº de slides del recorrido en vivo, leído de los datos de la presentación. */
-async function liveTotal() {
-  const mod = await import(path.join(ROOT, "src/data/presentation.js"));
-  return mod.LIVE_TOTAL;
+/**
+ * Páginas del PDF, derivadas de los datos de la presentación: una por slide,
+ * salvo el calendario, que rinde una página por mes (`?mes=`) porque sus meses
+ * son pestañas y en una sola captura sólo saldría el primero.
+ */
+async function buildPageList() {
+  const { LIVE_SEQUENCE } = await import(
+    path.join(ROOT, "src/data/presentation.js")
+  );
+
+  const pages = [];
+  LIVE_SEQUENCE.forEach((slide, i) => {
+    const n = i + 1;
+    if (slide.type === "calendario") {
+      const months = slide.months ?? [];
+      for (const m of months) {
+        pages.push({ query: `n=${n}&noanim&mes=${m}`, label: `${n}·mes${m}` });
+      }
+      if (months.length) return;
+    }
+    pages.push({ query: `n=${n}&noanim`, label: String(n) });
+  });
+  return pages;
 }
 
 async function main() {
@@ -78,8 +97,8 @@ async function main() {
     );
   }
 
-  const total = await liveTotal();
-  console.log(`Exportando ${total} slides…`);
+  const pages = await buildPageList();
+  console.log(`Exportando ${pages.length} páginas…`);
 
   await rm(SHOT_DIR, { recursive: true, force: true });
   await mkdir(SHOT_DIR, { recursive: true });
@@ -105,21 +124,28 @@ async function main() {
       deviceScaleFactor: SCALE,
     });
 
-    for (let n = 1; n <= total; n++) {
-      const url = `${server.url}/?n=${n}&noanim`;
-      await page.goto(url, { waitUntil: "networkidle0", timeout: 60000 });
+    for (const [i, { query, label }] of pages.entries()) {
+      await page.goto(`${server.url}/?${query}`, {
+        waitUntil: "networkidle0",
+        timeout: 60000,
+      });
       // los videos quedan en su primer fotograma: sin animación no hay
       // reproducción que capturar, así que basta con dejar asentar el layout
       await page.evaluate(() => document.fonts?.ready);
       await new Promise((r) => setTimeout(r, SETTLE_MS));
 
-      const file = path.join(SHOT_DIR, `${String(n).padStart(2, "0")}.png`);
+      // el nombre lleva el índice de página delante para que el orden
+      // alfabético de la carpeta sea el orden del PDF
+      const file = path.join(
+        SHOT_DIR,
+        `${String(i + 1).padStart(3, "0")}-slide${label}.png`
+      );
       await page.screenshot({
         path: file,
         clip: { x: 0, y: 0, width: BASE_W, height: BASE_H },
         captureBeyondViewport: false,
       });
-      process.stdout.write(`  ${n}/${total}\r`);
+      process.stdout.write(`  ${i + 1}/${pages.length}\r`);
     }
     console.log(`\nCapturas listas en ${path.relative(ROOT, SHOT_DIR)}`);
   } finally {
